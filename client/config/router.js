@@ -45,9 +45,9 @@ FlowRouter.route('/mabiaogl', {
     }
 });
 //权限管理
-FlowRouter.route('/quanxiangl', {
+FlowRouter.route('/zuzhiqxgl', {
     action: function() {
-        BlazeLayout.render('mainLayout', {content: 'quanxiangl'});
+        BlazeLayout.render('mainLayout', {content: 'zuzhiqxgl'});
     }
 });
 
