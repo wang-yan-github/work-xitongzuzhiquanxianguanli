@@ -44,6 +44,12 @@ FlowRouter.route('/mabiaogl', {
         BlazeLayout.render('mainLayout', {content: 'mabiaogl'});
     }
 });
+//权限管理
+FlowRouter.route('/quanxiangl', {
+    action: function() {
+        BlazeLayout.render('mainLayout', {content: 'quanxiangl'});
+    }
+});
 
 /*通用功能模块*/
 FlowRouter.route('/denglu', {
