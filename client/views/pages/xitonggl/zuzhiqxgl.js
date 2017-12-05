@@ -1,4 +1,4 @@
-
+var zuzhiqxglxxLength = 0;
 Template.zuzhiqxgl.onCreated(function () {
     // 原始-组织权限管理
     this.yuanshi_zuzhiqxglxx = new ReactiveVar(0);
@@ -29,6 +29,34 @@ Template.zuzhiqxgl.onRendered(function () {
                 for(var i in zuzhiqxglxx){
                     $("#xinzengbmjg").append("<option value='"+zuzhiqxglxx[i]._id+"'>"+zuzhiqxglxx[i].jigoumc+"</option>");
                 }
+
+                /*添加人员列表数据*/
+                // 获取机构id,作为唯一键.
+                // 获取机构名称显示
+                // 获取部门列表显示
+
+                for(var i in zuzhiqxglxx){
+                    $("#xinzengryjg").append("<option value='"+zuzhiqxglxx[i]._id+"'>"+zuzhiqxglxx[i].jigoumc+"</option>");
+                    for(var j in zuzhiqxglxx[i].bumenxx){
+                        $("#xinzengrybm").append("<option value='"+zuzhiqxglxx[i].bumenxx[j].bumenbh+"' class='zuzhiqxglxx"+[i]+"'>"+zuzhiqxglxx[i].bumenxx[j].bumenmc+"</option>");
+                        // 初始化的时候隐藏部门
+                        $('.zuzhiqxglxx'+[i]).hide();
+                    }
+                }
+
+                zuzhiqxglxxLength = zuzhiqxglxx.length;
+
+                /*// 二级联动 根据机构获取部门列表信息
+                $("#xinzengryjg").change(function(){
+                    for(var i =0; i < zuzhiqxglxx.length; i ++){
+                        $('.zuzhiqxglxx'+index).hide();
+                    }
+                    var index = $(this).get(0).selectedIndex;
+                    //$('.zuzhiqxglxx'+index).hide().eq(index).show();
+                    $('.zuzhiqxglxx'+index).show();
+                    console.log($(this).get(0).selectedIndex);
+                });*/
+
 
 
                 var fanhui_zuzhiqxglxx = new Array();
@@ -175,6 +203,17 @@ Template.zuzhiqxgl.helpers({
 });
 
 Template.zuzhiqxgl.events({
+    // 二级联动 根据机构获取部门列表信息
+    'change #xinzengryjg':function (event) {
+        console.log(event);
+        for(var i =0; i < zuzhiqxglxxLength; i ++){
+            $('.zuzhiqxglxx'+index).hide();
+        }
+
+        var index = event.currentTarget.selectedIndex;
+        //alert(event.currentTarget.selectedIndex);
+        $('.zuzhiqxglxx'+index).show();
+    },
     // model-新增-按钮-获取页面数据-向数据库添加数据-关闭模态框
     'click #xinzengjgan':function (event) {
         var zuzhiqxglxx = {
@@ -198,24 +237,17 @@ Template.zuzhiqxgl.events({
         ts_gc_zuzhijg.update({_id:id},{$push:{'bumenxx':bumenxx}});
         $('#xinzengbmmodel').modal('hide');
     },
-    'click #mabiao_gongchengzt':function (event) {
-    },
-    'click #mabiao_xiangmufl':function (event) {
-    },
-    'click #mabiao_fuwulx':function (event) {
-    },
+    'click #xinzengryan':function (event) {
+        var bumenxx = {
+            bumenbh: $('#xinzengbmbh').val(),
+            bumenmc: $('#xinzengbmmc').val()
+        };
+        var id = $('#xinzengbmjg').val();
 
-    'click #xinzengbc':function (event) {
+        // $push 向数组中添加元素
+        ts_gc_zuzhijg.update({_id:id},{$push:{'bumenxx':bumenxx}});
+        $('#xinzengbmmodel').modal('hide');
     },
-
-    'click #mazhisc':function (event) {
-    },
-
-    'click #mazhibj':function (event) {
-    },
-
-    'click #bianjibc':function (event) {
-    }
 
 });
 
