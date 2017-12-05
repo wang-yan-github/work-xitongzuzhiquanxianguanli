@@ -228,7 +228,7 @@ Template.zuzhiqxgl.helpers({
 });
 
 Template.zuzhiqxgl.events({
-    // 二级联动 根据机构获取部门列表信息 隐藏显示功能 取消选中功能 新增
+    // 二级联动 隐藏显示功能 取消选中功能 新增人员机构 select
     'change #xinzengryjg':function (event) {
         for(var i =0; i < zuzhiqxglxxLength; i ++){
             $('.xinzengrybm'+[i]).hide();
@@ -238,7 +238,7 @@ Template.zuzhiqxgl.events({
         var index = event.currentTarget.selectedIndex;
         $('.xinzengrybm'+index).show();
     },
-    // 二级联动 根据机构获取部门列表信息 隐藏显示功能 取消选中功能 编辑
+    // 二级联动 隐藏显示功能 取消选中功能 编辑部门机构 select
     'change #bianjibmjg':function (event) {
         for(var i =0; i < zuzhiqxglxxLength; i ++){
             $('.bianjibmbm'+[i]).hide();
@@ -247,6 +247,28 @@ Template.zuzhiqxgl.events({
 
         var index = event.currentTarget.selectedIndex;
         $('.bianjibmbm'+index).show();
+    },
+    // 三级联动 隐藏显示功能 取消选中功能 编辑人员机构 select
+    'change #bianjiryjg':function (event) {
+        for(var i =0; i < zuzhiqxglxxLength; i ++){
+            $('.bianjirybm'+[i]).hide();
+            $('.bianjiryry'+[i]).hide();
+        }
+        $('#bianjirybm').val('');
+        $('#bianjiryry').val('');
+
+        var index = event.currentTarget.selectedIndex;
+        $('.bianjirybm'+index).show();
+    },
+    // 三级联动 隐藏显示功能 取消选中功能 编辑人员部门 select
+    'change #bianjirybm':function (event) {
+        for(var i =0; i < zuzhiqxglxxLength; i ++){
+            $('.bianjiryry'+[i]).hide();
+        }
+        $('#bianjiryry').val('');
+
+        var index = event.currentTarget.selectedIndex;
+        $('.bianjiryry'+index).show();
     },
     // model-新增-按钮-获取页面数据-向数据库添加数据-关闭模态框
     'click #xinzengjgan':function (event) {
