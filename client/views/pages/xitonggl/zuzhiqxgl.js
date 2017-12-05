@@ -185,7 +185,8 @@ Template.zuzhiqxgl.events({
         };
         var id = $('#xinzengbmjg').val();
 
-        ts_gc_zuzhijg.update({_id:id},{$set:{'bumenxx':[bumenxx]}});
+        // $push 向数组中添加元素
+        ts_gc_zuzhijg.update({_id:id},{$push:{'bumenxx':bumenxx}});
         $('#xinzengbmmodel').modal('hide');
     },
     'click #mabiao_gongchengzt':function (event) {
