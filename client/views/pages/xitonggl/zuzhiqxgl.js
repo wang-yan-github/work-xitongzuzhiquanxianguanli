@@ -25,9 +25,9 @@ Template.zuzhiqxgl.onRendered(function () {
                 // 获取机构id,作为唯一键.
                 // 获取机构名称显示
                 //var jigouxx = _.pluck(zuzhiqxglxx, 'jigoumc','jigoubh');
-                //debugger;
+                debugger;
                 for(var i in zuzhiqxglxx){
-                    $("#xinzengbmjg").append("<option value=''"+zuzhiqxglxx[i].id+"'>"+zuzhiqxglxx[i].jigoumc+"</option>");
+                    $("#xinzengbmjg").append("<option value='"+zuzhiqxglxx[i]._id+"'>"+zuzhiqxglxx[i].jigoumc+"</option>");
                 }
 
 
@@ -168,10 +168,6 @@ Template.zuzhiqxgl.helpers({
 Template.zuzhiqxgl.events({
     // model-新增-按钮-获取页面数据-向数据库添加数据-关闭模态框
     'click #xinzengjgan':function (event) {
-        debugger;
-        var jigoubh = $('#xinzengjgjgbh').val();
-        var jigoumc = $('#xinzengjgjgmc').val();
-
         var zuzhiqxglxx = {
             jigoubh: $('#xinzengjgjgbh').val(),
             jigoumc: $('#xinzengjgjgmc').val()
@@ -181,59 +177,35 @@ Template.zuzhiqxgl.events({
         ts_gc_zuzhijg.insert(zuzhiqxglxx);
         $('#xinzengjgmodel').modal('hide');
     },
-    'click #mabiao_zhihuib':function (event) {
-        Session.set('mabiaoxx',_.findWhere(Session.get('yuanshi_mabiaoxx'),{mabiaomc: "指挥部"}).mabiaoxx);
-        dangqianym = '指挥部';
+    'click #xinzengbman':function (event) {
+
+        var bumenxx = {
+            jigoubh: $('#xinzengbmbh').val(),
+            jigoumc: $('#xinzengbmmc').val()
+        };
+        var id = $('#xinzengbmjg').val();
+
+        ts_gc_zuzhijg.update({_id:id},{$set:{'bumenxx':bumenxx}});
+        console.table(ts_gc_zuzhijg.update({_id:id},{$set:{'bumenxx':bumenxx}}));
+        $('#xinzengbmmodel').modal('hide');
     },
     'click #mabiao_gongchengzt':function (event) {
-        Session.set('mabiaoxx',_.findWhere(Session.get('yuanshi_mabiaoxx'),{mabiaomc: "工程状态"}).mabiaoxx);
-        dangqianym = '工程状态';
     },
     'click #mabiao_xiangmufl':function (event) {
-        Session.set('mabiaoxx',_.findWhere(Session.get('yuanshi_mabiaoxx'),{mabiaomc: "项目分类"}).mabiaoxx);
-        dangqianym = '项目分类';
     },
     'click #mabiao_fuwulx':function (event) {
-        Session.set('mabiaoxx',_.findWhere(Session.get('yuanshi_mabiaoxx'),{mabiaomc: "服务类型"}).mabiaoxx);
-        dangqianym = '服务类型';
     },
 
     'click #xinzengbc':function (event) {
-        var xinzengbh = $('#xinzengbh').val();
-        var xinzengmz = $('#xinzengmz').val();
-        var mabiao = _.findWhere(Session.get('yuanshi_mabiaoxx'),{mabiaomc:dangqianym});
-        mabiao.mabiaoxx.push({bianhao:xinzengbh,mazhi:xinzengmz});
-        Session.set('mabiaoxx',mabiao.mabiaoxx);
-        ts_gc_mabiaoxx.update({_id:mabiao._id},{$set:mabiao});
-        $('input').val('');
-        $('#myModal').modal('hide');
     },
 
     'click #mazhisc':function (event) {
-        var mabiao = _.findWhere(Session.get('yuanshi_mabiaoxx'),{mabiaomc:dangqianym});
-        mabiao.mabiaoxx = _.without(mabiao.mabiaoxx,_.findWhere(mabiao.mabiaoxx,{bianhao:event.target.name}));
-        Session.set('mabiaoxx',mabiao.mabiaoxx);
-        ts_gc_mabiaoxx.update({_id:mabiao._id},{$set:mabiao});
-
     },
 
     'click #mazhibj':function (event) {
-        var mabiao = _.findWhere(Session.get('yuanshi_mabiaoxx'), {mabiaomc: dangqianym});
-        var dangqian = _.findWhere(mabiao.mabiaoxx,{bianhao:event.target.name});
-        $('#bianjibh').val( dangqian.bianhao);
-        $('#bianjimz').val( dangqian.mazhi);
-        dangqianbjxb = mabiao.mabiaoxx.indexOf(dangqian);
     },
 
     'click #bianjibc':function (event) {
-        var bianjibh = $('#bianjibh').val();
-        var bianjimz = $('#bianjimz').val();
-        var mabiao = _.findWhere(Session.get('yuanshi_mabiaoxx'),{mabiaomc:dangqianym});
-        mabiao.mabiaoxx[dangqianbjxb].bianhao = bianjibh;
-        mabiao.mabiaoxx[dangqianbjxb].mazhi = bianjimz;
-        Session.set('mabiaoxx',mabiao.mabiaoxx);
-        ts_gc_mabiaoxx.update({_id:mabiao._id},{$set:mabiao});
-        $('#myModal1').modal('hide');
     }
 
 });
