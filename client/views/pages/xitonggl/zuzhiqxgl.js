@@ -287,9 +287,10 @@ Template.zuzhiqxgl.events({
     'click #xinzengjgan':function (event) {
         var fanhui_zuzhiqxglxx = Session.get('zuzhiqxglxx');
         fanhui_zuzhiqxglxx.push({jigoubh: $('#xinzengjgjgbh').val(),jigoumc: $('#xinzengjgjgmc').val()});
-        Session.set('zuzhiqxglxx',fanhui_zuzhiqxglxx);
+        //Session.set('zuzhiqxglxx',fanhui_zuzhiqxglxx);
 
         ts_gc_zuzhijg.insert({jigoubh: $('#xinzengjgjgbh').val(),jigoumc: $('#xinzengjgjgmc').val()});
+        Session.set('zuzhiqxglxx',ts_gc_zuzhijg.find().fetch()); // 获取ID
         $('input').val('');
         $('#xinzengjgmodel').modal('hide');
     },
@@ -334,46 +335,48 @@ Template.zuzhiqxgl.events({
         $('input').val('');
         $('#xinzengbmmodel').modal('hide');
     },
+    // model-新增-按钮-获取页面数据-向数据库添加数据-关闭模态框-新增人员
     'click #xinzengryan':function (event) {
-        var bumenxx = {
-            bumenbh: $('#xinzengbmbh').val(),
-            bumenmc: $('#xinzengbmmc').val()
-        };
-        var id = $('#xinzengbmjg').val();
-
-        var fanhui_zuzhiqxglxx = Session.get('zuzhiqxglxx');
-        fanhui_zuzhiqxglxx.push({jigoubh: $('#xinzengjgjgbh').val(),jigoumc: $('#xinzengjgjgmc').val()});
-
-        // $push 向数组中添加元素
-        ts_gc_zuzhijg.update({_id:id},{$push:{'bumenxx':bumenxx}});
-        $('#xinzengbmmodel').modal('hide');
-    },
-    'click #xinzengryan':function (event) {
-        debugger;
         var id = $('#xinzengryjg').val();
-        var bumenmc = $('#xinzengrybm').val();
+        var bumenbh = $('#xinzengrybm').val();
 
-        var fanhui_zuzhiqxglxx = zuzhiqxglxx;
+        debugger;
+        var zuzhiqxglxx = Session.get('zuzhiqxglxx');
         for(var i in zuzhiqxglxx){
-
             if(String(zuzhiqxglxx[i]._id).indexOf(id) !=  -1){
-                for(var j in zuzhiqxglxx[i].bumenxx){
 
-                    if(String(zuzhiqxglxx[i].bumenxx[j].bumenmc).indexOf(bumenmc) != -1){
-                        var fanhui_renyuanxx = new Array();
-                        var obj = new Object();
-                        obj.xingming = $('#xinzengryxm').val();
-                        obj.zhanghaobh = $('#xinzengrybh').val();
-                        obj.zhanghaomc = $('#xinzengrymc').val();
-                        obj.mima = $('#xinzengrymm').val();
-                        fanhui_renyuanxx.push(obj);
-                        fanhui_zuzhiqxglxx[i].bumenxx[j].renyuanxx = fanhui_renyuanxx;
+                for(var j in zuzhiqxglxx[i].bumenxx){
+                    if(String(zuzhiqxglxx[i].bumenxx[j].bumenbh).indexOf(bumenbh) !=  -1){
+                        if(zuzhiqxglxx[i].bumenxx[j].renyuanxx){
+                            // 更新插入
+                            var obj = new Object();
+                            obj.xingmin = $('#xinzengryxm').val();
+                            obj.zhanghaobh = $('#xinzengrybh').val();
+                            obj.zhanghaomc = $('#xinzengrymc').val();
+                            obj.mima = $('#xinzengrymm').val()
+                            zuzhiqxglxx[i].bumenxx[j].renyuanxx.push(obj);
+                        }else{
+                            // 第一次新增
+                            var fanhui_bumenxx = new Array();
+                            var obj = new Object();
+                            obj.xingmin = $('#xinzengryxm').val();
+                            obj.zhanghaobh = $('#xinzengrybh').val();
+                            obj.zhanghaomc = $('#xinzengrymc').val();
+                            obj.mima = $('#xinzengrymm').val()
+                            fanhui_bumenxx.push(obj);
+                            zuzhiqxglxx[i].bumenxx[j].renyuanxx = fanhui_bumenxx;
+                        }
                     }
                 }
             }
         }
 
-        ts_gc_zuzhijg.update({_id:id},{$set:[fanhui_zuzhiqxglxx]});
+
+        Session.set('zuzhiqxglxx',zuzhiqxglxx);
+
+        // $push 向数组中添加元素
+        ts_gc_zuzhijg.update({$set:zuzhiqxglxx});
+        $('input').val('');
         $('#xinzengrmmodel').modal('hide');
     },
     'click #bianjijgan':function (event) {
