@@ -331,6 +331,21 @@ Template.zuzhiqxgl.events({
         //ts_gc_zuzhijg.update({_id:id},{$set:{'jigoubh':jigoubh,'jigoumc':jigoumc}});
         $('#bianjijgmodel').modal('hide');
     },
+    'click #bianjiryman':function (event) {
+        debugger;
+        var xingming = $('#bianjiryxm').val();
+        var zhanghaobh = $('#bianjirybh').val();
+        var zhanghaomc = $('#bianjirymc').val();
+        var mima = $('#bianjirymm').val()
+
+        var where_id = $('#bianjiryjg').val();
+        var where_bumenmc = $('#bianjirybm').val();
+        var where_xingming = $('#bianjiryry').val();
+
+        //TODO mongodb 更新语句
+        //ts_gc_zuzhijg.update({_id:id},{$set:{'jigoubh':jigoubh,'jigoumc':jigoumc}});
+        $('#bianjirymodel').modal('hide');
+    },
 });
 
 
