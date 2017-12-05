@@ -341,6 +341,7 @@ Template.zuzhiqxgl.events({
         var bumenbh = $('#xinzengrybm').val();
 
         debugger;
+        var c = _.findWhere(Session.get('zuzhiqxglxx'),{_id:id});
         var zuzhiqxglxx = Session.get('zuzhiqxglxx');
         for(var i in zuzhiqxglxx){
             if(String(zuzhiqxglxx[i]._id).indexOf(id) !=  -1){
@@ -373,9 +374,13 @@ Template.zuzhiqxgl.events({
 
 
         Session.set('zuzhiqxglxx',zuzhiqxglxx);
+        zuzhiqxglxx.id = id;
 
         // $push 向数组中添加元素
-        ts_gc_zuzhijg.update({$set:zuzhiqxglxx});
+        //ts_gc_zuzhijg.update({_id:id},{$set:zuzhiqxglxx});
+        //ts_gc_zuzhijg.update({$set:zuzhiqxglxx});
+        //ts_gc_zuzhijg.save({$set:zuzhiqxglxx});
+        //ts_gc_zuzhijg.insert({$set:zuzhiqxglxx});
         $('input').val('');
         $('#xinzengrmmodel').modal('hide');
     },
