@@ -25,7 +25,7 @@ Template.zuzhiqxgl.onRendered(function () {
                 // 获取机构id,作为唯一键.
                 // 获取机构名称显示
                 //var jigouxx = _.pluck(zuzhiqxglxx, 'jigoumc','jigoubh');
-                debugger;
+                //debugger;
                 for(var i in zuzhiqxglxx){
                     $("#xinzengbmjg").append("<option value='"+zuzhiqxglxx[i]._id+"'>"+zuzhiqxglxx[i].jigoumc+"</option>");
                 }
@@ -248,7 +248,21 @@ Template.zuzhiqxgl.events({
         ts_gc_zuzhijg.update({_id:id},{$push:{'bumenxx':bumenxx}});
         $('#xinzengbmmodel').modal('hide');
     },
+    'click #xinzengryan':function (event) {
+        debugger;
+        var renyuanxx = {
+            xingming: $('#xinzengryxm').val(),
+            zhanghaobh: $('#xinzengrybh').val(),
+            zhanghaomc: $('#xinzengrymc').val(),
+            mima: $('#xinzengrymm').val()
+        };
+        var id = $('#xinzengryjg').val();
+        var bumenmc = $('#xinzengrybm').val();
 
+        // $push 向数组中添加元素 TODO mongodb 更新语句
+        ts_gc_zuzhijg.update({_id:id},{'bumenxx.bumenmc':bumenmc},{$push:{'bumenxx.renyuanxx':renyuanxx}});
+        $('#xinzengbmmodel').modal('hide');
+    },
 });
 
 
