@@ -36,16 +36,16 @@ Template.zuzhiqxgl.onRendered(function () {
                 for(var i in zuzhiqxglxx){
                     var obj = {};
 
-                    obj.id = zuzhiqxglxx[i].jigoubh + [i];
+                    obj.id = zuzhiqxglxx[i].jigoubh + 'zuzhiqxglxx' + [i];
                     obj.text = zuzhiqxglxx[i].jigoumc;
                     obj.parent = '#';
                     fanhui_zuzhiqxglxx.push(obj);
                     // 部门信息
                     for(var j in zuzhiqxglxx[i].bumenxx){
                         var obj = {};
-                        obj.id = zuzhiqxglxx[i].bumenxx[j].bumenbh + [i][j];
+                        obj.id = zuzhiqxglxx[i].bumenxx[j].bumenbh + [i] + 'bumenxx' +[j];
                         obj.text = zuzhiqxglxx[i].bumenxx[j].bumenmc;
-                        obj.parent = zuzhiqxglxx[i].jigoubh + [i];
+                        obj.parent = zuzhiqxglxx[i].jigoubh + 'zuzhiqxglxx' + [i];
                         fanhui_zuzhiqxglxx.push(obj);
                     }
                 }
@@ -180,13 +180,12 @@ Template.zuzhiqxgl.events({
     'click #xinzengbman':function (event) {
 
         var bumenxx = {
-            jigoubh: $('#xinzengbmbh').val(),
-            jigoumc: $('#xinzengbmmc').val()
+            bumenbh: $('#xinzengbmbh').val(),
+            bumenmc: $('#xinzengbmmc').val()
         };
         var id = $('#xinzengbmjg').val();
 
-        ts_gc_zuzhijg.update({_id:id},{$set:{'bumenxx':bumenxx}});
-        console.table(ts_gc_zuzhijg.update({_id:id},{$set:{'bumenxx':bumenxx}}));
+        ts_gc_zuzhijg.update({_id:id},{$set:{'bumenxx':[bumenxx]}});
         $('#xinzengbmmodel').modal('hide');
     },
     'click #mabiao_gongchengzt':function (event) {
