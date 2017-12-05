@@ -118,8 +118,8 @@ Template.zuzhiqxgl.onRendered(function () {
                     { "id" : "ajson4", "parent" : "ajson2", "text" : "Child 2" },
                 ];
 
-                console.log(fanhui_zuzhiqxglxx);
-                console.log(demo);
+                //console.log(fanhui_zuzhiqxglxx);
+                //console.log(demo);
 
                 $("#plugins1").jstree({
                     "checkbox" : {
@@ -316,7 +316,7 @@ Template.zuzhiqxgl.events({
         var bumenmc = $('#xinzengrybm').val();
 
         //TODO mongodb 更新语句
-        //ts_gc_zuzhijg.update({_id:id},{'bumenxx':[{'bumenmc':bumenmc}]},{$push:{'bumenxx':[renyuanxx]}});
+        ts_gc_zuzhijg.update({_id:id},{'bumenxx':[{'bumenmc':bumenmc}]},{$set:{'bumenxx':[renyuanxx]}});
         $('#xinzengrmmodel').modal('hide');
     },
     'click #bianjijgan':function (event) {
