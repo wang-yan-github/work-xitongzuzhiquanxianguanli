@@ -2,168 +2,221 @@
 
     {{> pageHeading title='组织权限管理'}}
 
-    <div class="wrapper wrapper-content">
-        <div class="wrapper wrapper-content  animated fadeInRight">
-            <div  class="ibox-title">
-                <div>
-                    <a data-toggle="modal" class="btn btn-primary demo1">保存</a>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div  class="ibox-title">
+            <div>
+                <a data-toggle="modal" class="btn btn-primary demo1">保存</a>
+            </div>
+</div>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5>组织权限</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div style="height:470px;" class="ibox-content">
+                        <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target='#xinzengjgmodel'> 新增机构 </button>
+                        <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target='#xinzengbmmodel'> 新增部门 </button>
+                        <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target='#myModal'> 新增人员 </button>
+                        <button type="button" class="btn btn-xs btn-primary"> 编辑机构 </button>
+
+                        <div class="ibox-content">
+                            <div id="plugins1">
+                                <!--{{#each shuju_zuzhiqxglxx}}
+                                <ul>
+                                    <li class="jstree-open"> {{jigoumc}}
+                                        <ul>
+                                            <li class="jstree-open">工程部
+                                                <ul>
+                                                    <li data-jstree='"type":"css"}'>丁一</li>
+                                                    <li data-jstree='"type":"css"}'>丁二</li>
+                                                    <li data-jstree='"type":"css"}'>丁三</li>
+                                                </ul>
+                                            </li>
+                                            <li>财务部
+                                                <ul>
+                                                    <li data-jstree='"type":"html"}'>钱一</li>
+                                                    <li data-jstree='"type":"html"}'>钱二</li>
+                                                    <li data-jstree='"type":"html"}'>钱三</li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                {{/each}}-->
+                                <!--<ul>
+                                    <li class="jstree-open">邳州市交通局
+                                        <ul>
+                                            <li class="jstree-open">工程部
+                                                <ul>
+                                                    <li data-jstree='"type":"css"}'>丁一</li>
+                                                    <li data-jstree='"type":"css"}'>丁二</li>
+                                                    <li data-jstree='"type":"css"}'>丁三</li>
+                                                </ul>
+                                            </li>
+                                            <li>财务部
+                                                <ul>
+                                                    <li data-jstree='"type":"html"}'>钱一</li>
+                                                    <li data-jstree='"type":"html"}'>钱二</li>
+                                                    <li data-jstree='"type":"html"}'>钱三</li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>-->
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="ibox">
-                        <div class="ibox-title">
-                            <h5>组织权限</h5>
-                            <div class="ibox-tools">
-                                <a class="collapse-link">
-                                    <i class="fa fa-chevron-up"></i>
-                                </a>
-                                <a class="close-link">
-                                    <i class="fa fa-times"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div style="height:470px;" class="ibox-content">
-                            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target='#myModal'> 新增机构 </button>
-                            <button type="button" class="btn btn-sm btn-primary"> 编辑机构 </button>
-                            <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content animated bounceInRight">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                            <h4 class="modal-title">机构新增</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                    <fieldset class="form-horizontal">
-                                                        <div class="form-group"><label class="col-sm-4 control-label">机构编号:</label>
-                                                            <div class="col-sm-8"><input type="text" class="form-control" placeholder="机构编号"></div>
-                                                        </div>
-                                                        <div class="form-group"><label class="col-sm-4 control-label">机构名称:</label>
-                                                            <div class="col-sm-8"><input type="text" class="form-control" placeholder="机构名称"></div>
-                                                        </div>
-                                                        <div class="form-group"><label class="col-sm-4 control-label">部门编号:</label>
-                                                            <div class="col-sm-8"><input type="text" class="form-control" placeholder="部门编号"></div>
-                                                        </div>
-                                                        <div class="form-group"><label class="col-sm-4 control-label">部门名称:</label>
-                                                            <div class="col-sm-8"><input type="text" class="form-control" placeholder="部门名称"></div>
-                                                        </div>
-                                                    </fieldset>
-                                                </div>
-                                            </div>
 
+
+            <div class="col-lg-4">
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5>角色管理</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div style="height: 470px" class="ibox-content">
+                        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal1"> 新增角色 </button>
+                        <button type="button" class="btn btn-sm btn-primary"> 编辑角色 </button>
+                        <div class="modal inmodal" id="myModal1" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content animated bounceInRight">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                        <h4 class="modal-title">角色新增</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <fieldset class="form-horizontal">
+                                                    <div class="form-group"><label class="col-sm-4 control-label">角色编号:</label>
+                                                        <div class="col-sm-8"><input type="text" class="form-control" placeholder="角色编号"></div>
+                                                    </div>
+                                                    <div class="form-group"><label class="col-sm-4 control-label">角色名称:</label>
+                                                        <div class="col-sm-8"><input type="text" class="form-control" placeholder="机构名称"></div>
+                                                    </div>
+                                                </fieldset>
+                                            </div>
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
-                                            <button type="button" class="btn btn-primary">新增</button>
-                                        </div>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                                        <button type="button" class="btn btn-primary">新增</button>
                                     </div>
                                 </div>
                             </div>
-                            <div class="ibox-content">
-                                <div id="plugins1">
-                                    <ul>
-                                        <li class="jstree-open">邳州市交通局
-                                            <ul>
-                                                <li class="jstree-open">工程部
-                                                    <ul>
-                                                        <li data-jstree='"type":"css"}'>丁一</li>
-                                                        <li data-jstree='"type":"css"}'>丁二</li>
-                                                        <li data-jstree='"type":"css"}'>丁三</li>
-                                                    </ul>
-                                                </li>
-                                                <li>财务部
-                                                    <ul>
-                                                        <li data-jstree='"type":"html"}'>钱一</li>
-                                                        <li data-jstree='"type":"html"}'>钱二</li>
-                                                        <li data-jstree='"type":"html"}'>钱三</li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
+                        </div>
+                        <div class="ibox-content">
+                            <div id="plugins2">
+                                <ul>
+                                    <li class="jstree-open">邳州市交通局
+                                        <ul>
+                                            <li class="jstree-open">普通用户
+                                                <ul>
+                                                    <li data-jstree='"type":"css"}'>道路项目用户</li>
+                                                    <li data-jstree='"type":"css"}'>桥梁项目用户</li>
+                                                    <li data-jstree='"type":"css"}'>安保设施项目用户</li>
+                                                    <li data-jstree='"type":"css"}'>养护项目用户</li>
+
+                                                </ul>
+                                            </li>
+                                            <li>财务用户
+                                                <ul>
+                                                    <li data-jstree='"type":"html"}'>财务管理用户</li>
+                                                    <li data-jstree='"type":"html"}'>财务审批用户</li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
+        </div>
+    </div>
 
-                <div class="col-lg-4">
-                    <div class="ibox">
-                        <div class="ibox-title">
-                            <h5>角色管理</h5>
-                            <div class="ibox-tools">
-                                <a class="collapse-link">
-                                    <i class="fa fa-chevron-up"></i>
-                                </a>
-                                <a class="close-link">
-                                    <i class="fa fa-times"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div style="height: 470px" class="ibox-content">
-                            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal1"> 新增角色 </button>
-                            <button type="button" class="btn btn-sm btn-primary"> 编辑角色 </button>
-                            <div class="modal inmodal" id="myModal1" tabindex="-1" role="dialog" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content animated bounceInRight">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                            <h4 class="modal-title">角色新增</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                    <fieldset class="form-horizontal">
-                                                        <div class="form-group"><label class="col-sm-4 control-label">角色编号:</label>
-                                                            <div class="col-sm-8"><input type="text" class="form-control" placeholder="角色编号"></div>
-                                                        </div>
-                                                        <div class="form-group"><label class="col-sm-4 control-label">角色名称:</label>
-                                                            <div class="col-sm-8"><input type="text" class="form-control" placeholder="机构名称"></div>
-                                                        </div>
-                                                    </fieldset>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
-                                            <button type="button" class="btn btn-primary">新增</button>
-                                        </div>
-                                    </div>
+    <!--模态框 新增机构-->
+    <div class="modal inmodal" id="xinzengjgmodel" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content animated bounceInRight">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">机构新增</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <fieldset class="form-horizontal">
+                                <div class="form-group"><label class="col-sm-4 control-label">机构编号:</label>
+                                    <div class="col-sm-8"><input type="text" class="form-control" placeholder="机构编号" id="xinzengjgjgbh"></div>
                                 </div>
-                            </div>
-                            <div class="ibox-content">
-                                <div id="plugins2">
-                                    <ul>
-                                        <li class="jstree-open">邳州市交通局
-                                            <ul>
-                                                <li class="jstree-open">普通用户
-                                                    <ul>
-                                                        <li data-jstree='"type":"css"}'>道路项目用户</li>
-                                                        <li data-jstree='"type":"css"}'>桥梁项目用户</li>
-                                                        <li data-jstree='"type":"css"}'>安保设施项目用户</li>
-                                                        <li data-jstree='"type":"css"}'>养护项目用户</li>
-
-                                                    </ul>
-                                                </li>
-                                                <li>财务用户
-                                                    <ul>
-                                                        <li data-jstree='"type":"html"}'>财务管理用户</li>
-                                                        <li data-jstree='"type":"html"}'>财务审批用户</li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
+                                <div class="form-group"><label class="col-sm-4 control-label">机构名称:</label>
+                                    <div class="col-sm-8"><input type="text" class="form-control" placeholder="机构名称" id="xinzengjgjgmc"></div>
                                 </div>
-                            </div>
+                            </fieldset>
                         </div>
                     </div>
-                </div>
 
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="xinzengjgan">新增</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--模态框 新增部门-->
+    <div class="modal inmodal" id="xinzengbmmodel" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content animated bounceInRight">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">机构新增</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <fieldset class="form-horizontal">
+                                <div class="form-group"><label class="col-sm-4 control-label">归属机构:</label>
+                                    <div class="col-sm-8"><select class="form-control" id="xinzengbmjg"></select></div>
+                                </div>
+                                <div class="form-group"><label class="col-sm-4 control-label">部门编号:</label>
+                                    <div class="col-sm-8"><input type="text" class="form-control" placeholder="机构编号" id="xinzengbmbh"></div>
+                                </div>
+                                <div class="form-group"><label class="col-sm-4 control-label">部门名称:</label>
+                                    <div class="col-sm-8"><input type="text" class="form-control" placeholder="机构名称" id="xinzengbmmc"></div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="xinzengjgan">新增</button>
+                </div>
             </div>
         </div>
     </div>
