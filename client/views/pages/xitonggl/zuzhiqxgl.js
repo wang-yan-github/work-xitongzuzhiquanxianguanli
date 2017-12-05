@@ -28,6 +28,7 @@ Template.zuzhiqxgl.onRendered(function () {
                 //debugger;
                 for(var i in zuzhiqxglxx){
                     $("#xinzengbmjg").append("<option value='"+zuzhiqxglxx[i]._id+"'>"+zuzhiqxglxx[i].jigoumc+"</option>");
+                    $("#bianjijg").append("<option value='"+zuzhiqxglxx[i]._id+"'>"+zuzhiqxglxx[i].jigoumc+"</option>");
                 }
 
                 /*添加人员列表数据*/
@@ -260,8 +261,18 @@ Template.zuzhiqxgl.events({
         var bumenmc = $('#xinzengrybm').val();
 
         // $push 向数组中添加元素 TODO mongodb 更新语句
-        ts_gc_zuzhijg.update({_id:id},{'bumenxx.bumenmc':bumenmc},{$push:{'bumenxx.renyuanxx':renyuanxx}});
-        $('#xinzengbmmodel').modal('hide');
+        ts_gc_zuzhijg.update({_id:id},{'bumenxx':[{'bumenmc':bumenmc}]},{$push:{'bumenxx':[renyuanxx]}});
+        $('#xinzengrmmodel').modal('hide');
+    },
+    'click #bianjijgan':function (event) {
+        debugger;
+        var jigoubh = $('#bianjijgjgbh').val();
+        var jigoumc = $('#bianjijgmc').val()
+
+        var id = $('#bianjijg').val();
+
+        ts_gc_zuzhijg.update({_id:id},{$set:{'jigoubh':jigoubh,'jigoumc':jigoumc}});
+        $('#bianjijgmodel').modal('hide');
     },
 });
 

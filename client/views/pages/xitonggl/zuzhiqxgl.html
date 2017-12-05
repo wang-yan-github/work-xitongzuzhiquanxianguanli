@@ -274,7 +274,7 @@
         </div>
     </div>
 
-    <!--模态框 新增机构-->
+    <!--模态框 编辑机构-->
     <div class="modal inmodal" id="bianjijgmodel" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content animated bounceInRight">
@@ -286,11 +286,14 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <fieldset class="form-horizontal">
+                                <div class="form-group"><label class="col-sm-4 control-label">编辑机构:</label>
+                                    <div class="col-sm-8"><select class="form-control" id="bianjijg"></select></div>
+                                </div>
                                 <div class="form-group"><label class="col-sm-4 control-label">机构编号:</label>
                                     <div class="col-sm-8"><input type="text" class="form-control" placeholder="机构编号" id="bianjijgjgbh"></div>
                                 </div>
                                 <div class="form-group"><label class="col-sm-4 control-label">机构名称:</label>
-                                    <div class="col-sm-8"><input type="text" class="form-control" placeholder="机构名称" id="bianjigjgmc"></div>
+                                    <div class="col-sm-8"><input type="text" class="form-control" placeholder="机构名称" id="bianjijgmc"></div>
                                 </div>
                             </fieldset>
                         </div>
@@ -300,6 +303,43 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
                     <button type="button" class="btn btn-primary" id="bianjijgan">新增</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--模态框 编辑部门-->
+    <div class="modal inmodal" id="bianjibmmodel" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content animated bounceInRight">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">部门编辑</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <fieldset class="form-horizontal">
+                                <div class="form-group"><label class="col-sm-4 control-label">归属机构:</label>
+                                    <div class="col-sm-8"><select class="form-control" id="bianjibmjg"></select></div>
+                                </div>
+                                <div class="form-group"><label class="col-sm-4 control-label">编辑部门:</label>
+                                    <div class="col-sm-8"><select class="form-control" id="bianjibmbm"></select></div>
+                                </div>
+                                <div class="form-group"><label class="col-sm-4 control-label">部门编号:</label>
+                                    <div class="col-sm-8"><input type="text" class="form-control" placeholder="部门编号" id="bianjibmbmbh"></div>
+                                </div>
+                                <div class="form-group"><label class="col-sm-4 control-label">部门名称:</label>
+                                    <div class="col-sm-8"><input type="text" class="form-control" placeholder="部门名称" id="bianjibmbmmc"></div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="bianjibman">新增</button>
                 </div>
             </div>
         </div>
