@@ -25,6 +25,71 @@ Template.zuzhiqxgl.onRendered(function () {
             //$('#plugins1').jstree(true).refresh();
             // 销毁
             $('#plugins1').jstree("destroy");
+            // 清空select 内容
+            /*$("#xinzengbmjg").empty();
+            $("#bianjijg").empty();
+            $("#xinzengryjg").empty();
+            $("#bianjibmjg").empty();
+            $("#bianjiryjg").empty();
+            $("#xinzengrybm").empty();
+            $("#bianjibmbm").empty();
+            $("#bianjirybm").empty();
+            $("#bianjiryry").empty();*/
+
+            document.getElementById("xinzengbmjg").options.length=0;
+            document.getElementById("bianjijg").options.length=0;
+            document.getElementById("xinzengryjg").options.length=0;
+            document.getElementById("bianjibmjg").options.length=0;
+            document.getElementById("bianjiryjg").options.length=0;
+            document.getElementById("xinzengrybm").options.length=0;
+            document.getElementById("bianjibmbm").options.length=0;
+            document.getElementById("bianjirybm").options.length=0;
+            document.getElementById("bianjiryry").options.length=0;
+
+            /*添加部门列表数据*/
+            // 获取机构id,作为唯一键.
+            // 获取机构名称显示
+            //var jigouxx = _.pluck(zuzhiqxglxx, 'jigoumc','jigoubh');
+            //debugger;
+            for(var i in zuzhiqxglxx){
+                $("#xinzengbmjg").append("<option value='"+zuzhiqxglxx[i]._id+"'>"+zuzhiqxglxx[i].jigoumc+"</option>");
+                $("#bianjijg").append("<option value='"+zuzhiqxglxx[i]._id+"'>"+zuzhiqxglxx[i].jigoumc+"</option>");
+            }
+
+            /*添加人员列表数据*/
+            // 获取机构id,作为唯一键.
+            // 获取机构名称显示
+            // 获取部门列表显示
+            for(var i in zuzhiqxglxx){
+                // 新增人员
+                $("#xinzengryjg").append("<option value='"+zuzhiqxglxx[i]._id+"'>"+zuzhiqxglxx[i].jigoumc+"</option>");
+                // 编辑部门
+                $("#bianjibmjg").append("<option value='"+zuzhiqxglxx[i]._id+"'>"+zuzhiqxglxx[i].jigoumc+"</option>");
+                // 编辑人员
+                $("#bianjiryjg").append("<option value='"+zuzhiqxglxx[i]._id+"'>"+zuzhiqxglxx[i].jigoumc+"</option>");
+
+                for(var j in zuzhiqxglxx[i].bumenxx){
+                    // // 新增人员
+                    $("#xinzengrybm").append("<option value='"+zuzhiqxglxx[i].bumenxx[j].bumenbh+"' class='xinzengrybm"+[i]+"'>"+zuzhiqxglxx[i].bumenxx[j].bumenmc+"</option>");
+                    // 初始化的时候隐藏部门
+                    $('.xinzengrybm'+[i]).hide();
+
+                    // 编辑部门
+                    $("#bianjibmbm").append("<option value='"+zuzhiqxglxx[i].bumenxx[j].bumenbh+"' class='bianjibmbm"+[i]+"'>"+zuzhiqxglxx[i].bumenxx[j].bumenmc+"</option>");
+                    // 初始化的时候隐藏部门
+                    $('.bianjibmbm'+[i]).hide();
+
+                    // 编辑人员
+                    $("#bianjirybm").append("<option value='"+zuzhiqxglxx[i].bumenxx[j].bumenbh+"' class='bianjirybm"+[i]+"'>"+zuzhiqxglxx[i].bumenxx[j].bumenmc+"</option>");
+                    // 初始化的时候隐藏部门
+                    $('.bianjirybm'+[i]).hide();
+                    for(var k in zuzhiqxglxx[i].bumenxx[j].renyuanxx){
+                        $("#bianjiryry").append("<option value='"+zuzhiqxglxx[i].bumenxx[j].renyuanxx[k].zhanghaobh+"' class='bianjiryry"+[i]+"'>"+zuzhiqxglxx[i].bumenxx[j].renyuanxx[k].xingming+"</option>");
+                        // 初始化的时候隐藏人员
+                        $('.bianjiryry'+[i]).hide();
+                    }
+                }
+            }
 
             var fanhui_zuzhiqxglxx = new Array();
             // 组织结构信息
@@ -103,50 +168,7 @@ Template.zuzhiqxgl.onRendered(function () {
 
             Tracker.afterFlush(function () {
 
-                /*添加部门列表数据*/
-                // 获取机构id,作为唯一键.
-                // 获取机构名称显示
-                //var jigouxx = _.pluck(zuzhiqxglxx, 'jigoumc','jigoubh');
-                //debugger;
-                for(var i in zuzhiqxglxx){
-                    $("#xinzengbmjg").append("<option value='"+zuzhiqxglxx[i]._id+"'>"+zuzhiqxglxx[i].jigoumc+"</option>");
-                    $("#bianjijg").append("<option value='"+zuzhiqxglxx[i]._id+"'>"+zuzhiqxglxx[i].jigoumc+"</option>");
-                }
 
-                /*添加人员列表数据*/
-                // 获取机构id,作为唯一键.
-                // 获取机构名称显示
-                // 获取部门列表显示
-                for(var i in zuzhiqxglxx){
-                    // 新增人员
-                    $("#xinzengryjg").append("<option value='"+zuzhiqxglxx[i]._id+"'>"+zuzhiqxglxx[i].jigoumc+"</option>");
-                    // 编辑部门
-                    $("#bianjibmjg").append("<option value='"+zuzhiqxglxx[i]._id+"'>"+zuzhiqxglxx[i].jigoumc+"</option>");
-                    // 编辑人员
-                    $("#bianjiryjg").append("<option value='"+zuzhiqxglxx[i]._id+"'>"+zuzhiqxglxx[i].jigoumc+"</option>");
-
-                    for(var j in zuzhiqxglxx[i].bumenxx){
-                        // // 新增人员
-                        $("#xinzengrybm").append("<option value='"+zuzhiqxglxx[i].bumenxx[j].bumenbh+"' class='xinzengrybm"+[i]+"'>"+zuzhiqxglxx[i].bumenxx[j].bumenmc+"</option>");
-                        // 初始化的时候隐藏部门
-                        $('.xinzengrybm'+[i]).hide();
-
-                        // 编辑部门
-                        $("#bianjibmbm").append("<option value='"+zuzhiqxglxx[i].bumenxx[j].bumenbh+"' class='bianjibmbm"+[i]+"'>"+zuzhiqxglxx[i].bumenxx[j].bumenmc+"</option>");
-                        // 初始化的时候隐藏部门
-                        $('.bianjibmbm'+[i]).hide();
-
-                        // 编辑人员
-                        $("#bianjirybm").append("<option value='"+zuzhiqxglxx[i].bumenxx[j].bumenbh+"' class='bianjirybm"+[i]+"'>"+zuzhiqxglxx[i].bumenxx[j].bumenmc+"</option>");
-                        // 初始化的时候隐藏部门
-                        $('.bianjirybm'+[i]).hide();
-                        for(var k in zuzhiqxglxx[i].bumenxx[j].renyuanxx){
-                            $("#bianjiryry").append("<option value='"+zuzhiqxglxx[i].bumenxx[j].renyuanxx[k].zhanghaobh+"' class='bianjiryry"+[i]+"'>"+zuzhiqxglxx[i].bumenxx[j].renyuanxx[k].xingming+"</option>");
-                            // 初始化的时候隐藏人员
-                            $('.bianjiryry'+[i]).hide();
-                        }
-                    }
-                }
 
             });
         }
@@ -261,9 +283,8 @@ Template.zuzhiqxgl.events({
         var index = event.currentTarget.selectedIndex;
         $('.bianjiryry'+index).show();
     },
-    // model-新增-按钮-获取页面数据-向数据库添加数据-关闭模态框
+    // model-新增-按钮-获取页面数据-向数据库添加数据-关闭模态框-新增机构
     'click #xinzengjgan':function (event) {
-        debugger;
         var fanhui_zuzhiqxglxx = Session.get('zuzhiqxglxx');
         fanhui_zuzhiqxglxx.push({jigoubh: $('#xinzengjgjgbh').val(),jigoumc: $('#xinzengjgjgmc').val()});
         Session.set('zuzhiqxglxx',fanhui_zuzhiqxglxx);
@@ -272,16 +293,45 @@ Template.zuzhiqxgl.events({
         $('input').val('');
         $('#xinzengjgmodel').modal('hide');
     },
+    // model-新增-按钮-获取页面数据-向数据库添加数据-关闭模态框-新增部门
     'click #xinzengbman':function (event) {
-
+        debugger;
         var bumenxx = {
             bumenbh: $('#xinzengbmbh').val(),
             bumenmc: $('#xinzengbmmc').val()
         };
         var id = $('#xinzengbmjg').val();
 
+        var zuzhiqxglxx = Session.get('zuzhiqxglxx');
+        for(var i in zuzhiqxglxx){
+            if(String(zuzhiqxglxx[i]._id).indexOf(id) !=  -1){
+
+
+                if(zuzhiqxglxx[i].bumenxx){
+                    // 更新插入
+                    var obj = new Object();
+                    obj.bumenbh = $('#xinzengbmbh').val();
+                    obj.bumenmc = $('#xinzengbmmc').val()
+                    zuzhiqxglxx[i].bumenxx.push(obj);
+                }else{
+                    // 第一次新增
+                    var fanhui_bumenxx = new Array();
+                    var obj = new Object();
+                    obj.bumenbh = $('#xinzengbmbh').val();
+                    obj.bumenmc = $('#xinzengbmmc').val()
+                    fanhui_bumenxx.push(obj);
+                    zuzhiqxglxx[i].bumenxx = fanhui_bumenxx;
+
+                }
+
+            }
+        }
+
+        Session.set('zuzhiqxglxx',zuzhiqxglxx);
+
         // $push 向数组中添加元素
         ts_gc_zuzhijg.update({_id:id},{$push:{'bumenxx':bumenxx}});
+        $('input').val('');
         $('#xinzengbmmodel').modal('hide');
     },
     'click #xinzengryan':function (event) {
@@ -290,6 +340,9 @@ Template.zuzhiqxgl.events({
             bumenmc: $('#xinzengbmmc').val()
         };
         var id = $('#xinzengbmjg').val();
+
+        var fanhui_zuzhiqxglxx = Session.get('zuzhiqxglxx');
+        fanhui_zuzhiqxglxx.push({jigoubh: $('#xinzengjgjgbh').val(),jigoumc: $('#xinzengjgjgmc').val()});
 
         // $push 向数组中添加元素
         ts_gc_zuzhijg.update({_id:id},{$push:{'bumenxx':bumenxx}});
