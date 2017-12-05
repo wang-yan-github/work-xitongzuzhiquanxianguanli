@@ -1,4 +1,5 @@
 var zuzhiqxglxxLength = 0;
+var zuzhiqxglxx;
 Template.zuzhiqxgl.onCreated(function () {
     // 原始-组织权限管理
     this.yuanshi_zuzhiqxglxx = new ReactiveVar(0);
@@ -17,7 +18,7 @@ Template.zuzhiqxgl.onCreated(function () {
 
 Template.zuzhiqxgl.onRendered(function () {
     Tracker.autorun(function () {
-        var zuzhiqxglxx = ts_gc_zuzhijg.find({}).fetch();
+        zuzhiqxglxx = ts_gc_zuzhijg.find({}).fetch();
         if (handle.ready()){
             Tracker.afterFlush(function () {
 
@@ -67,8 +68,6 @@ Template.zuzhiqxgl.onRendered(function () {
                         }
                     }
                 }
-
-                zuzhiqxglxxLength = zuzhiqxglxx.length;
 
                 /*// 二级联动 根据机构获取部门列表信息
                 $("#xinzengryjg").change(function(){
@@ -230,7 +229,7 @@ Template.zuzhiqxgl.helpers({
 Template.zuzhiqxgl.events({
     // 二级联动 隐藏显示功能 取消选中功能 新增人员机构 select
     'change #xinzengryjg':function (event) {
-        for(var i =0; i < zuzhiqxglxxLength; i ++){
+        for(var i =0; i < zuzhiqxglxx.length; i ++){
             $('.xinzengrybm'+[i]).hide();
         }
         $('#xinzengrybm').val('');
@@ -240,7 +239,7 @@ Template.zuzhiqxgl.events({
     },
     // 二级联动 隐藏显示功能 取消选中功能 编辑部门机构 select
     'change #bianjibmjg':function (event) {
-        for(var i =0; i < zuzhiqxglxxLength; i ++){
+        for(var i =0; i < zuzhiqxglxx.length; i ++){
             $('.bianjibmbm'+[i]).hide();
         }
         $('#bianjibmbm').val('');
@@ -250,7 +249,7 @@ Template.zuzhiqxgl.events({
     },
     // 三级联动 隐藏显示功能 取消选中功能 编辑人员机构 select
     'change #bianjiryjg':function (event) {
-        for(var i =0; i < zuzhiqxglxxLength; i ++){
+        for(var i =0; i < zuzhiqxglxx.length; i ++){
             $('.bianjirybm'+[i]).hide();
             $('.bianjiryry'+[i]).hide();
         }
@@ -262,7 +261,7 @@ Template.zuzhiqxgl.events({
     },
     // 三级联动 隐藏显示功能 取消选中功能 编辑人员部门 select
     'change #bianjirybm':function (event) {
-        for(var i =0; i < zuzhiqxglxxLength; i ++){
+        for(var i =0; i < zuzhiqxglxx.length; i ++){
             $('.bianjiryry'+[i]).hide();
         }
         $('#bianjiryry').val('');
