@@ -43,10 +43,19 @@ Template.zuzhiqxgl.onRendered(function () {
                     // 部门信息
                     for(var j in zuzhiqxglxx[i].bumenxx){
                         var obj = {};
-                        obj.id = zuzhiqxglxx[i].bumenxx[j].bumenbh + [i] + 'bumenxx' +[j];
+                        obj.id = zuzhiqxglxx[i].bumenxx[j].bumenbh + 'zuzhiqxglxx' + [i] + 'bumenxx' +[j];
                         obj.text = zuzhiqxglxx[i].bumenxx[j].bumenmc;
                         obj.parent = zuzhiqxglxx[i].jigoubh + 'zuzhiqxglxx' + [i];
                         fanhui_zuzhiqxglxx.push(obj);
+
+                        // 人员信息
+                        for(var k in zuzhiqxglxx[i].bumenxx[j].renyuanxx){
+                            var obj = {};
+                            obj.id = zuzhiqxglxx[i].bumenxx[j].renyuanxx[k].zhanghaobh + [i] + 'bumenxx' +[j] + 'renyuanxx' + [k];
+                            obj.text = zuzhiqxglxx[i].bumenxx[j].renyuanxx[k].xingming;
+                            obj.parent = zuzhiqxglxx[i].bumenxx[j].bumenbh + 'zuzhiqxglxx' + [i] + 'bumenxx' +[j];
+                            fanhui_zuzhiqxglxx.push(obj);
+                        }
                     }
                 }
 
