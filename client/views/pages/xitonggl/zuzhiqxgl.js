@@ -36,12 +36,21 @@ Template.zuzhiqxgl.onRendered(function () {
                 // 获取机构名称显示
                 // 获取部门列表显示
 
+                // 新增
                 for(var i in zuzhiqxglxx){
                     $("#xinzengryjg").append("<option value='"+zuzhiqxglxx[i]._id+"'>"+zuzhiqxglxx[i].jigoumc+"</option>");
                     for(var j in zuzhiqxglxx[i].bumenxx){
-                        $("#xinzengrybm").append("<option value='"+zuzhiqxglxx[i].bumenxx[j].bumenbh+"' class='zuzhiqxglxx"+[i]+"'>"+zuzhiqxglxx[i].bumenxx[j].bumenmc+"</option>");
+                        $("#xinzengrybm").append("<option value='"+zuzhiqxglxx[i].bumenxx[j].bumenbh+"' class='xinzengbm"+[i]+"'>"+zuzhiqxglxx[i].bumenxx[j].bumenmc+"</option>");
                         // 初始化的时候隐藏部门
-                        $('.zuzhiqxglxx'+[i]).hide();
+                        $('.xinzengbm'+[i]).hide();
+                    }
+
+                    // 编辑
+                    $("#bianjibmjg").append("<option value='"+zuzhiqxglxx[i]._id+"'>"+zuzhiqxglxx[i].jigoumc+"</option>");
+                    for(var j in zuzhiqxglxx[i].bumenxx){
+                        $("#bianjibmbm").append("<option value='"+zuzhiqxglxx[i].bumenxx[j].bumenbh+"' class='bianjibm"+[i]+"'>"+zuzhiqxglxx[i].bumenxx[j].bumenmc+"</option>");
+                        // 初始化的时候隐藏部门
+                        $('.bianjibm'+[i]).hide();
                     }
                 }
 
@@ -108,7 +117,7 @@ Template.zuzhiqxgl.onRendered(function () {
                             'icon' : 'fa fa-folder'
                         },
                     },
-                    "contextmenu": {
+                    /*"contextmenu": {
                         "items": function ($node) {
                             var tree = $("#tree").jstree(true);
                             return {
@@ -124,9 +133,10 @@ Template.zuzhiqxgl.onRendered(function () {
                                 },
                             };
                         }
-                    },
+                    },*/
 
-                    "plugins" : [ "checkbox","types", "contextmenu" ],
+                    /*"plugins" : [ "checkbox","types", "contextmenu" ],*/
+                    'plugins' : [ 'types', 'dnd' ],
                     'core' : {
                         'data': fanhui_zuzhiqxglxx
                     }
@@ -204,16 +214,25 @@ Template.zuzhiqxgl.helpers({
 });
 
 Template.zuzhiqxgl.events({
-    // 二级联动 根据机构获取部门列表信息
+    // 二级联动 根据机构获取部门列表信息 隐藏显示功能 取消选中功能 新增
     'change #xinzengryjg':function (event) {
-        console.log(event);
         for(var i =0; i < zuzhiqxglxxLength; i ++){
-            $('.zuzhiqxglxx'+index).hide();
+            $('.xinzengbm'+[i]).hide();
         }
+        $('#xinzengrybm').val('');
 
         var index = event.currentTarget.selectedIndex;
-        //alert(event.currentTarget.selectedIndex);
-        $('.zuzhiqxglxx'+index).show();
+        $('.xinzengbm'+index).show();
+    },
+    // 二级联动 根据机构获取部门列表信息 隐藏显示功能 取消选中功能 编辑
+    'change #bianjibmjg':function (event) {
+        for(var i =0; i < zuzhiqxglxxLength; i ++){
+            $('.bianjibm'+[i]).hide();
+        }
+        $('#bianjibmbm').val('');
+
+        var index = event.currentTarget.selectedIndex;
+        $('.bianjibm'+index).show();
     },
     // model-新增-按钮-获取页面数据-向数据库添加数据-关闭模态框
     'click #xinzengjgan':function (event) {
