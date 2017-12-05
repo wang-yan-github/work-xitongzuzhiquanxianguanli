@@ -40,23 +40,23 @@ Template.zuzhiqxgl.onRendered(function () {
                 for(var i in zuzhiqxglxx){
                     // 新增人员
                     $("#xinzengryjg").append("<option value='"+zuzhiqxglxx[i]._id+"'>"+zuzhiqxglxx[i].jigoumc+"</option>");
+                    // 编辑部门
+                    $("#bianjibmjg").append("<option value='"+zuzhiqxglxx[i]._id+"'>"+zuzhiqxglxx[i].jigoumc+"</option>");
+                    // 编辑人员
+                    $("#bianjiryjg").append("<option value='"+zuzhiqxglxx[i]._id+"'>"+zuzhiqxglxx[i].jigoumc+"</option>");
+
                     for(var j in zuzhiqxglxx[i].bumenxx){
+                        // // 新增人员
                         $("#xinzengrybm").append("<option value='"+zuzhiqxglxx[i].bumenxx[j].bumenbh+"' class='xinzengrybm"+[i]+"'>"+zuzhiqxglxx[i].bumenxx[j].bumenmc+"</option>");
                         // 初始化的时候隐藏部门
                         $('.xinzengrybm'+[i]).hide();
-                    }
 
-                    // 编辑部门
-                    $("#bianjibmjg").append("<option value='"+zuzhiqxglxx[i]._id+"'>"+zuzhiqxglxx[i].jigoumc+"</option>");
-                    for(var j in zuzhiqxglxx[i].bumenxx){
+                        // 编辑部门
                         $("#bianjibmbm").append("<option value='"+zuzhiqxglxx[i].bumenxx[j].bumenbh+"' class='bianjibmbm"+[i]+"'>"+zuzhiqxglxx[i].bumenxx[j].bumenmc+"</option>");
                         // 初始化的时候隐藏部门
                         $('.bianjibmbm'+[i]).hide();
-                    }
 
-                    // 编辑人员
-                    $("#bianjiryjg").append("<option value='"+zuzhiqxglxx[i]._id+"'>"+zuzhiqxglxx[i].jigoumc+"</option>");
-                    for(var j in zuzhiqxglxx[i].bumenxx){
+                        // 编辑人员
                         $("#bianjirybm").append("<option value='"+zuzhiqxglxx[i].bumenxx[j].bumenbh+"' class='bianjirybm"+[i]+"'>"+zuzhiqxglxx[i].bumenxx[j].bumenmc+"</option>");
                         // 初始化的时候隐藏部门
                         $('.bianjirybm'+[i]).hide();
