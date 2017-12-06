@@ -103,37 +103,17 @@
                         </div>
                     </div>
                     <div style="height: 470px" class="ibox-content">
-                        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal1"> 新增角色 </button>
-                        <button type="button" class="btn btn-sm btn-primary"> 编辑角色 </button>
-                        <div class="modal inmodal" id="myModal1" tabindex="-1" role="dialog" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content animated bounceInRight">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                        <h4 class="modal-title">角色新增</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <fieldset class="form-horizontal">
-                                                    <div class="form-group"><label class="col-sm-4 control-label">角色编号:</label>
-                                                        <div class="col-sm-8"><input type="text" class="form-control" placeholder="角色编号"></div>
-                                                    </div>
-                                                    <div class="form-group"><label class="col-sm-4 control-label">角色名称:</label>
-                                                        <div class="col-sm-8"><input type="text" class="form-control" placeholder="机构名称"></div>
-                                                    </div>
-                                                </fieldset>
-                                            </div>
-                                        </div>
+                        <!--<button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal1"> 新增角色 </button>
+                        <button type="button" class="btn btn-sm btn-primary"> 编辑角色 </button>-->
+                        <ul class="list-inline">
+                            <li><button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target='#xinzengjsmodel'> 新增角色 </button></li>
+                            <li><button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target='#xinzengzhmodel'> 新增账号 </button></li>
+                        </ul>
+                        <ul class="list-inline">
+                            <li><button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target='#bianjijsmodel'> 编辑角色 </button></li>
+                            <li><button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target='#bianjizhmodel'> 编辑账号 </button></li>
+                        </ul>
 
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
-                                        <button type="button" class="btn btn-primary">新增</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <div class="ibox-content">
                             <div id="plugins2">
                                 <ul>
@@ -386,6 +366,154 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
                     <button type="button" class="btn btn-primary" id="bianjiryman">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--模态框 新增角色-->
+    <div class="modal inmodal" id="xinzengjsmodel" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content animated bounceInRight">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">角色新增</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <fieldset class="form-horizontal">
+                                <div class="form-group"><label class="col-sm-4 control-label">归属部门:</label>
+                                    <div class="col-sm-8"><select class="form-control" id="xinzengjsbm"></select></div>
+                                </div>
+                                <div class="form-group"><label class="col-sm-4 control-label">角色编号:</label>
+                                    <div class="col-sm-8"><input type="text" class="form-control" placeholder="角色编号" id="xinzengjsbh"></div>
+                                </div>
+                                <div class="form-group"><label class="col-sm-4 control-label">角色名称:</label>
+                                    <div class="col-sm-8"><input type="text" class="form-control" placeholder="角色名称" id="xinzengjsmc"></div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="xinzengjsan">新增</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--模态框 新增账号-->
+    <div class="modal inmodal" id="xinzengzhmodel" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content animated bounceInRight">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">账号新增</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <fieldset class="form-horizontal">
+                                <div class="form-group"><label class="col-sm-4 control-label">归属部门:</label>
+                                    <div class="col-sm-8"><select class="form-control" id="xinzengzhbm"></select></div>
+                                </div>
+                                <div class="form-group"><label class="col-sm-4 control-label">归属角色:</label>
+                                    <div class="col-sm-8"><select class="form-control" id="xinzengzhjs"></select></div>
+                                </div>
+                                <div class="form-group"><label class="col-sm-4 control-label">账号编号:</label>
+                                    <div class="col-sm-8"><input type="text" class="form-control" placeholder="账号编号" id="xinzengzhzhbh"></div>
+                                </div>
+                                <div class="form-group"><label class="col-sm-4 control-label">账号名称:</label>
+                                    <div class="col-sm-8"><input type="text" class="form-control" placeholder="账号名称" id="xinzengzhzhmc"></div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="xinzengzhan">新增</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--模态框 编辑角色-->
+    <div class="modal inmodal" id="bianjijsmodel" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content animated bounceInRight">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">角色编辑</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <fieldset class="form-horizontal">
+                                <div class="form-group"><label class="col-sm-4 control-label">归属部门:</label>
+                                    <div class="col-sm-8"><select class="form-control" id="bianjijsbm"></select></div>
+                                </div>
+                                <div class="form-group"><label class="col-sm-4 control-label">编辑角色:</label>
+                                    <div class="col-sm-8"><select class="form-control" id="bianjijsjs"></select></div>
+                                </div>
+                                <div class="form-group"><label class="col-sm-4 control-label">角色编号:</label>
+                                    <div class="col-sm-8"><input type="text" class="form-control" placeholder="角色编号" id="bianjijsbh"></div>
+                                </div>
+                                <div class="form-group"><label class="col-sm-4 control-label">角色名称:</label>
+                                    <div class="col-sm-8"><input type="text" class="form-control" placeholder="角色名称" id="bianjijsmc"></div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="bianjijsan">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--模态框 编辑账号-->
+    <div class="modal inmodal" id="bianjizhmodel" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content animated bounceInRight">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">账号编辑</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <fieldset class="form-horizontal">
+                                <div class="form-group"><label class="col-sm-4 control-label">归属部门:</label>
+                                    <div class="col-sm-8"><select class="form-control" id="bianjizhbm"></select></div>
+                                </div>
+                                <div class="form-group"><label class="col-sm-4 control-label">归属角色:</label>
+                                    <div class="col-sm-8"><select class="form-control" id="biajizhjs"></select></div>
+                                </div>
+                                <div class="form-group"><label class="col-sm-4 control-label">编辑账号:</label>
+                                    <div class="col-sm-8"><select class="form-control" id="bianjizhzh"></select></div>
+                                </div>
+                                <div class="form-group"><label class="col-sm-4 control-label">账号编号:</label>
+                                    <div class="col-sm-8"><input type="text" class="form-control" placeholder="账号编号" id="bianjizhbh"></div>
+                                </div>
+                                <div class="form-group"><label class="col-sm-4 control-label">账号名称:</label>
+                                    <div class="col-sm-8"><input type="text" class="form-control" placeholder="账号名称" id="bianjizhmc"></div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="bianjizhan">保存</button>
                 </div>
             </div>
         </div>
