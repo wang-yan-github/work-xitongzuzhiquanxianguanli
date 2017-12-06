@@ -180,7 +180,10 @@ Template.zuzhiqxgl.onRendered(function () {
                     },
                 },
                 /*"plugins" : [ "checkbox","types" ]*/
-                'plugins' : [ 'types', 'dnd' ]
+                'plugins' : [ 'types', 'dnd' ],
+                'core' : {
+                    'data': fanhui_zuzhiqxglxx
+                }
             });
 
         }
