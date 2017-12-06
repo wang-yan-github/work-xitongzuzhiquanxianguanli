@@ -307,7 +307,6 @@ Template.zuzhiqxgl.events({
         for(var i in zuzhiqxglxx){
             if(String(zuzhiqxglxx[i]._id).indexOf(id) !=  -1){
 
-
                 if(zuzhiqxglxx[i].bumenxx){
                     // 更新插入
                     var obj = new Object();
@@ -322,7 +321,6 @@ Template.zuzhiqxgl.events({
                     obj.bumenmc = $('#xinzengbmmc').val()
                     fanhui_bumenxx.push(obj);
                     zuzhiqxglxx[i].bumenxx = fanhui_bumenxx;
-
                 }
 
             }
@@ -415,41 +413,37 @@ Template.zuzhiqxgl.events({
     // model-编辑-按钮-获取页面数据-向数据库添加数据-关闭模态框-编辑部门
     'click #bianjibman':function (event) {
         debugger;
-        var jigoubh = $('#bianjijgjgbh').val();
-        var jiegoumc = $('#bianjijgmc').val();
+        var bumenbh = $('#bianjibmbmbh').val();
+        var bumenmc = $('#bianjibmbmmc').val();
 
-        var where_id = $('#bianjijg').val();
+        var where_id = $('#bianjibmjg').val();
+        var where_bumenbh = $('#bianjibmbm').val();
 
         var gengxin_zuzhiqxglxx = _.findWhere(Session.get('zuzhiqxglxx'),{_id:where_id});
         var zuzhiqxglxx = Session.get('zuzhiqxglxx');
         for(var i in zuzhiqxglxx){
             if(String(zuzhiqxglxx[i]._id).indexOf(where_id) !=  -1){
 
+                for(var j in zuzhiqxglxx[i].bumenxx){
+                    if(String(zuzhiqxglxx[i].bumenxx[j].bumenbh).indexOf(where_bumenbh) !=  -1){
 
-                if(zuzhiqxglxx[i].bumenxx){
-                    // 更新插入
-                    var obj = new Object();
-                    obj.bumenbh = $('#xinzengbmbh').val();
-                    obj.bumenmc = $('#xinzengbmmc').val()
-                    zuzhiqxglxx[i].bumenxx.push(obj);
-                }else{
-                    // 第一次新增
-                    var fanhui_bumenxx = new Array();
-                    var obj = new Object();
-                    obj.bumenbh = $('#xinzengbmbh').val();
-                    obj.bumenmc = $('#xinzengbmmc').val()
-                    fanhui_bumenxx.push(obj);
-                    zuzhiqxglxx[i].bumenxx = fanhui_bumenxx;
+                        zuzhiqxglxx[i].bumenxx[j].bumenbh = bumenbh;
+                        zuzhiqxglxx[i].bumenxx[j].bumenmc = bumenmc;
+                        gengxin_zuzhiqxglxx.bumenxx[j].bumenbh = bumenbh;
+                        gengxin_zuzhiqxglxx.bumenxx[j].bumenmc = bumenmc;
 
+                    }
                 }
 
             }
         }
 
-        //TODO mongodb 更新语句
-        //ts_gc_zuzhijg.update({_id:id},{$set:{'jigoubh':jigoubh,'jigoumc':jigoumc}});
-        $('#bianjijgmodel').modal('hide');
+        $('input').val('');
+        Session.set('zuzhiqxglxx',zuzhiqxglxx);
+        ts_gc_zuzhijg.update({_id:gengxin_zuzhiqxglxx._id},{$set:gengxin_zuzhiqxglxx});
+        $('#bianjibmmodel').modal('hide');
     },
+    // model-编辑-按钮-获取页面数据-向数据库添加数据-关闭模态框-编辑人员
     'click #bianjiryman':function (event) {
         debugger;
         var xingming = $('#bianjiryxm').val();
@@ -461,7 +455,41 @@ Template.zuzhiqxgl.events({
         var where_bumenmc = $('#bianjirybm').val();
         var where_xingming = $('#bianjiryry').val();
 
-        //TODO mongodb 更新语句
+        var gengxin_zuzhiqxglxx = _.findWhere(Session.get('zuzhiqxglxx'),{_id:id});
+        var zuzhiqxglxx = Session.get('zuzhiqxglxx');
+        for(var i in zuzhiqxglxx){
+            if(String(zuzhiqxglxx[i]._id).indexOf(id) !=  -1){
+
+                for(var j in zuzhiqxglxx[i].bumenxx){
+                    if(String(zuzhiqxglxx[i].bumenxx[j].bumenbh).indexOf(bumenbh) !=  -1){
+                        if(zuzhiqxglxx[i].bumenxx[j].renyuanxx){
+                            // 更新插入
+                            var obj = new Object();
+                            obj.xingming = $('#xinzengryxm').val();
+                            obj.zhanghaobh = $('#xinzengrybh').val();
+                            obj.zhanghaomc = $('#xinzengrymc').val();
+                            obj.mima = $('#xinzengrymm').val();
+                            gengxin_zuzhiqxglxx.bumenxx[j].renyuanxx.push(obj);
+                            zuzhiqxglxx[i].bumenxx[j].renyuanxx.push(obj);
+                        }else{
+                            // 第一次新增
+                            var fanhui_bumenxx = new Array();
+                            var obj = new Object();
+                            obj.xingming = $('#xinzengryxm').val();
+                            obj.zhanghaobh = $('#xinzengrybh').val();
+                            obj.zhanghaomc = $('#xinzengrymc').val();
+                            obj.mima = $('#xinzengrymm').val()
+                            fanhui_bumenxx.push(obj);
+                            gengxin_zuzhiqxglxx.bumenxx[j].renyuanxx = fanhui_bumenxx;
+                            zuzhiqxglxx[i].bumenxx[j].renyuanxx = fanhui_bumenxx;
+                        }
+                    }
+                }
+            }
+        }
+
+        $('input').val('');
+        Session.set('zuzhiqxglxx',zuzhiqxglxx);
         //ts_gc_zuzhijg.update({_id:id},{$set:{'jigoubh':jigoubh,'jigoumc':jigoumc}});
         $('#bianjirymodel').modal('hide');
     },
