@@ -386,13 +386,65 @@ Template.zuzhiqxgl.events({
         $('input').val('');
         $('#xinzengrmmodel').modal('hide');
     },
+    // model-编辑-按钮-获取页面数据-向数据库添加数据-关闭模态框-编辑机构
     'click #bianjijgan':function (event) {
         debugger;
-        var bumenbh = $('#bianjibmbmbh').val();
-        var bumenmc = $('#bianjibmbmmc').val()
+        var jigoubh = $('#bianjijgjgbh').val();
+        var jigoumc = $('#bianjijgmc').val();
 
-        var where_id = $('#bianjibmjg').val();
-        var where_bumenmc = $('#bianjibmbm').val();
+        var where_id = $('#bianjijg').val();
+
+        var gengxin_zuzhiqxglxx = _.findWhere(Session.get('zuzhiqxglxx'),{_id:where_id});
+        var zuzhiqxglxx = Session.get('zuzhiqxglxx');
+        for(var i in zuzhiqxglxx){
+            if(String(zuzhiqxglxx[i]._id).indexOf(where_id) !=  -1){
+
+                zuzhiqxglxx[i].jigoubh = jigoubh;
+                zuzhiqxglxx[i].jigoumc = jigoumc;
+                gengxin_zuzhiqxglxx.jigoubh = jigoubh;
+                gengxin_zuzhiqxglxx.jigoumc = jigoumc;
+
+            }
+        }
+
+        $('input').val('');
+        Session.set('zuzhiqxglxx',zuzhiqxglxx);
+        ts_gc_zuzhijg.update({_id:gengxin_zuzhiqxglxx._id},{$set:gengxin_zuzhiqxglxx});
+        $('#bianjijgmodel').modal('hide');
+    },
+    // model-编辑-按钮-获取页面数据-向数据库添加数据-关闭模态框-编辑部门
+    'click #bianjibman':function (event) {
+        debugger;
+        var jigoubh = $('#bianjijgjgbh').val();
+        var jiegoumc = $('#bianjijgmc').val();
+
+        var where_id = $('#bianjijg').val();
+
+        var gengxin_zuzhiqxglxx = _.findWhere(Session.get('zuzhiqxglxx'),{_id:where_id});
+        var zuzhiqxglxx = Session.get('zuzhiqxglxx');
+        for(var i in zuzhiqxglxx){
+            if(String(zuzhiqxglxx[i]._id).indexOf(where_id) !=  -1){
+
+
+                if(zuzhiqxglxx[i].bumenxx){
+                    // 更新插入
+                    var obj = new Object();
+                    obj.bumenbh = $('#xinzengbmbh').val();
+                    obj.bumenmc = $('#xinzengbmmc').val()
+                    zuzhiqxglxx[i].bumenxx.push(obj);
+                }else{
+                    // 第一次新增
+                    var fanhui_bumenxx = new Array();
+                    var obj = new Object();
+                    obj.bumenbh = $('#xinzengbmbh').val();
+                    obj.bumenmc = $('#xinzengbmmc').val()
+                    fanhui_bumenxx.push(obj);
+                    zuzhiqxglxx[i].bumenxx = fanhui_bumenxx;
+
+                }
+
+            }
+        }
 
         //TODO mongodb 更新语句
         //ts_gc_zuzhijg.update({_id:id},{$set:{'jigoubh':jigoubh,'jigoumc':jigoumc}});
