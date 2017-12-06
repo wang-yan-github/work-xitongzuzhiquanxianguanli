@@ -25,6 +25,7 @@ Template.zuzhiqxgl.onRendered(function () {
             //$('#plugins1').jstree(true).refresh();
             // 销毁
             $('#plugins1').jstree("destroy");
+            $('#plugins2').jstree("destroy");
             // 清空select 内容
             $("#xinzengbmjg").empty();
             $("#bianjijg").empty();
@@ -83,6 +84,7 @@ Template.zuzhiqxgl.onRendered(function () {
                     $("#bianjirybm").append("<option value='"+zuzhiqxglxx[i].bumenxx[j].bumenbh+"' class='bianjirybm"+[i]+"'>"+zuzhiqxglxx[i].bumenxx[j].bumenmc+"</option>");
                     // 初始化的时候隐藏部门
                     $('.bianjirybm'+[i]).hide();
+
                     for(var k in zuzhiqxglxx[i].bumenxx[j].renyuanxx){
                         $("#bianjiryry").append("<option value='"+zuzhiqxglxx[i].bumenxx[j].renyuanxx[k].zhanghaobh+"' class='bianjiryry"+[i]+"'>"+zuzhiqxglxx[i].bumenxx[j].renyuanxx[k].xingming+"</option>");
                         // 初始化的时候隐藏人员
@@ -98,6 +100,7 @@ Template.zuzhiqxgl.onRendered(function () {
 
                 obj.id = zuzhiqxglxx[i].jigoubh + 'zuzhiqxglxx' + [i];
                 obj.text = zuzhiqxglxx[i].jigoumc;
+
                 obj.parent = '#';
                 fanhui_zuzhiqxglxx.push(obj);
                 // 部门信息
@@ -166,30 +169,25 @@ Template.zuzhiqxgl.onRendered(function () {
                 }
             });
 
-            Tracker.afterFlush(function () {
-
-
-
+            $("#plugins2").jstree({
+                "checkbox" : {
+                    "keep_selected_style" : false,
+                    "three_state": false
+                },
+                "types" : {
+                    'default' : {
+                        'icon' : 'fa fa-folder'
+                    },
+                },
+                /*"plugins" : [ "checkbox","types" ]*/
+                'plugins' : [ 'types', 'dnd' ]
             });
+
         }
     })
     //树形目录
     $(document).ready(function(){
 
-
-        $("#plugins2").jstree({
-            "checkbox" : {
-                "keep_selected_style" : false,
-                "three_state": false
-            },
-            "types" : {
-                'default' : {
-                    'icon' : 'fa fa-folder'
-                },
-            },
-            "plugins" : [ "checkbox","types" ]
-
-        });
         $("#plugins3").jstree({
             "checkbox" : {
                 "keep_selected_style" : false,
@@ -278,7 +276,7 @@ Template.zuzhiqxgl.events({
         for(var i =0; i < Session.get('zuzhiqxglxx').length; i ++){
             $('.bianjiryry'+[i]).hide();
         }
-        $('#bianjiryry').val('');
+        //$('#bianjiryry').val('');
 
         var index = event.currentTarget.selectedIndex;
         $('.bianjiryry'+index).show();
