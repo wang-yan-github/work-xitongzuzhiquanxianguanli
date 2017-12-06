@@ -90,10 +90,13 @@ Template.zuzhiqxgl.onRendered(function () {
                         // 初始化的时候隐藏人员
                         $('.bianjiryry'+[i]).hide();
                     }
+
+
                 }
             }
 
             var fanhui_zuzhiqxglxx = new Array();
+            var fanhui_jiaosexx = new Array();
             // 组织结构信息
             for(var i in zuzhiqxglxx){
                 var obj = {};
@@ -105,11 +108,11 @@ Template.zuzhiqxgl.onRendered(function () {
                 fanhui_zuzhiqxglxx.push(obj);
                 // 部门信息
                 for(var j in zuzhiqxglxx[i].bumenxx){
-                    var obj = {};
-                    obj.id = zuzhiqxglxx[i].bumenxx[j].bumenbh + 'zuzhiqxglxx' + [i] + 'bumenxx' +[j];
-                    obj.text = zuzhiqxglxx[i].bumenxx[j].bumenmc;
-                    obj.parent = zuzhiqxglxx[i].jigoubh + 'zuzhiqxglxx' + [i];
-                    fanhui_zuzhiqxglxx.push(obj);
+                    var bumenxx = {};
+                    bumenxx.id = zuzhiqxglxx[i].bumenxx[j].bumenbh + 'zuzhiqxglxx' + [i] + 'bumenxx' +[j];
+                    bumenxx.text = zuzhiqxglxx[i].bumenxx[j].bumenmc;
+                    bumenxx.parent = zuzhiqxglxx[i].jigoubh + 'zuzhiqxglxx' + [i];
+                    fanhui_zuzhiqxglxx.push(bumenxx);
 
                     // 人员信息
                     for(var k in zuzhiqxglxx[i].bumenxx[j].renyuanxx){
@@ -119,6 +122,28 @@ Template.zuzhiqxgl.onRendered(function () {
                         obj.parent = zuzhiqxglxx[i].bumenxx[j].bumenbh + 'zuzhiqxglxx' + [i] + 'bumenxx' +[j];
                         fanhui_zuzhiqxglxx.push(obj);
                     }
+
+                    // 角色部门信息
+                    bumenxx.parent = '#';
+                    fanhui_jiaosexx.push(bumenxx);
+                    // 角色信息
+                    for(var k in zuzhiqxglxx[i].bumenxx[j].juesexx){
+                        var obj = {};
+                        obj.id = zuzhiqxglxx[i].bumenxx[j].juesexx[k].juesebh + [i] + 'bumenxx' +[j] + 'juesexx' + [k];
+                        obj.text = zuzhiqxglxx[i].bumenxx[j].juesexx[k].juesemc;
+                        obj.parent = zuzhiqxglxx[i].bumenxx[j].bumenbh + 'zuzhiqxglxx' + [i] + 'bumenxx' +[j];
+                        fanhui_jiaosexx.push(obj);
+
+                        // 账号信息
+                        for(var l in zuzhiqxglxx[i].bumenxx[j].juesexx[k].zhanghaoxx){
+                            var obj = {};
+                            obj.id = zuzhiqxglxx[i].bumenxx[j].juesexx[k].zhanghaoxx[l].zhanghaobh + [i] + 'bumenxx' +[j] + 'jiaosexx' + [k] + 'zhanghaoxx' + [l];
+                            obj.text = zuzhiqxglxx[i].bumenxx[j].juesexx[k].zhanghaoxx[l].zhanghaomc;
+                            obj.parent = zuzhiqxglxx[i].bumenxx[j].juesexx[k].juesebh + [i] + 'bumenxx' +[j] + 'juesexx' + [k];
+                            fanhui_jiaosexx.push(obj);
+                        }
+                    }
+
                 }
             }
 
@@ -182,7 +207,7 @@ Template.zuzhiqxgl.onRendered(function () {
                 /*"plugins" : [ "checkbox","types" ]*/
                 'plugins' : [ 'types', 'dnd' ],
                 'core' : {
-                    'data': fanhui_zuzhiqxglxx
+                    'data': fanhui_jiaosexx
                 }
             });
 
