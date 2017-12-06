@@ -338,7 +338,6 @@ Template.zuzhiqxgl.events({
     'click #xinzengjgan':function (event) {
         var fanhui_zuzhiqxglxx = Session.get('zuzhiqxglxx');
         fanhui_zuzhiqxglxx.push({jigoubh: $('#xinzengjgjgbh').val(),jigoumc: $('#xinzengjgjgmc').val()});
-        //Session.set('zuzhiqxglxx',fanhui_zuzhiqxglxx);
 
         ts_gc_zuzhijg.insert({jigoubh: $('#xinzengjgjgbh').val(),jigoumc: $('#xinzengjgjgmc').val()});
         Session.set('zuzhiqxglxx',ts_gc_zuzhijg.find().fetch()); // 获取ID
@@ -496,6 +495,7 @@ Template.zuzhiqxgl.events({
     },
     // model-编辑-按钮-获取页面数据-向数据库添加数据-关闭模态框-编辑人员
     'click #bianjiryman':function (event) {
+        debugger;
 
         var where_id = $('#bianjiryjg').val();
         var where_bumenbh = $('#bianjirybm').val();
@@ -533,6 +533,15 @@ Template.zuzhiqxgl.events({
         Session.set('zuzhiqxglxx',zuzhiqxglxx);
         ts_gc_zuzhijg.update({_id:gengxin_zuzhiqxglxx._id},{$set:gengxin_zuzhiqxglxx});
         $('#bianjirymodel').modal('hide');
+    },
+    // model-新增-按钮-获取页面数据-向数据库添加数据-关闭模态框-新增角色
+    'click #xinzengjsan':function (event) {
+        var zuzhiqxglxx = Session.get('zuzhiqxglxx');
+
+        //$('input').val('');
+        //Session.set('zuzhiqxglxx',zuzhiqxglxx);
+        //ts_gc_zuzhijg.update({_id:gengxin_zuzhiqxglxx._id},{$set:gengxin_zuzhiqxglxx});
+        $('#xinzengjsmodel').modal('hide');
     },
 });
 
