@@ -26,7 +26,7 @@ Template.zuzhiqxgl.onRendered(function () {
             // 销毁
             $('#plugins1').jstree("destroy");
             // 清空select 内容
-            /*$("#xinzengbmjg").empty();
+            $("#xinzengbmjg").empty();
             $("#bianjijg").empty();
             $("#xinzengryjg").empty();
             $("#bianjibmjg").empty();
@@ -34,9 +34,9 @@ Template.zuzhiqxgl.onRendered(function () {
             $("#xinzengrybm").empty();
             $("#bianjibmbm").empty();
             $("#bianjirybm").empty();
-            $("#bianjiryry").empty();*/
+            $("#bianjiryry").empty();
 
-            document.getElementById("xinzengbmjg").options.length=0;
+            /*document.getElementById("xinzengbmjg").options.length=0;
             document.getElementById("bianjijg").options.length=0;
             document.getElementById("xinzengryjg").options.length=0;
             document.getElementById("bianjibmjg").options.length=0;
@@ -44,7 +44,7 @@ Template.zuzhiqxgl.onRendered(function () {
             document.getElementById("xinzengrybm").options.length=0;
             document.getElementById("bianjibmbm").options.length=0;
             document.getElementById("bianjirybm").options.length=0;
-            document.getElementById("bianjiryry").options.length=0;
+            document.getElementById("bianjiryry").options.length=0;*/
 
             /*添加部门列表数据*/
             // 获取机构id,作为唯一键.
@@ -341,7 +341,7 @@ Template.zuzhiqxgl.events({
         var bumenbh = $('#xinzengrybm').val();
 
         debugger;
-        var c = _.findWhere(Session.get('zuzhiqxglxx'),{_id:id});
+        var gengxin_zuzhiqxglxx = _.findWhere(Session.get('zuzhiqxglxx'),{_id:id});
         var zuzhiqxglxx = Session.get('zuzhiqxglxx');
         for(var i in zuzhiqxglxx){
             if(String(zuzhiqxglxx[i]._id).indexOf(id) !=  -1){
@@ -351,20 +351,22 @@ Template.zuzhiqxgl.events({
                         if(zuzhiqxglxx[i].bumenxx[j].renyuanxx){
                             // 更新插入
                             var obj = new Object();
-                            obj.xingmin = $('#xinzengryxm').val();
+                            obj.xingming = $('#xinzengryxm').val();
                             obj.zhanghaobh = $('#xinzengrybh').val();
                             obj.zhanghaomc = $('#xinzengrymc').val();
-                            obj.mima = $('#xinzengrymm').val()
+                            obj.mima = $('#xinzengrymm').val();
+                            gengxin_zuzhiqxglxx.bumenxx[j].renyuanxx.push(obj);
                             zuzhiqxglxx[i].bumenxx[j].renyuanxx.push(obj);
                         }else{
                             // 第一次新增
                             var fanhui_bumenxx = new Array();
                             var obj = new Object();
-                            obj.xingmin = $('#xinzengryxm').val();
+                            obj.xingming = $('#xinzengryxm').val();
                             obj.zhanghaobh = $('#xinzengrybh').val();
                             obj.zhanghaomc = $('#xinzengrymc').val();
                             obj.mima = $('#xinzengrymm').val()
                             fanhui_bumenxx.push(obj);
+                            gengxin_zuzhiqxglxx.bumenxx[j].renyuanxx = fanhui_bumenxx;
                             zuzhiqxglxx[i].bumenxx[j].renyuanxx = fanhui_bumenxx;
                         }
                     }
@@ -374,10 +376,10 @@ Template.zuzhiqxgl.events({
 
 
         Session.set('zuzhiqxglxx',zuzhiqxglxx);
-        zuzhiqxglxx.id = id;
 
+        //zuzhiqxglxx.id = id;
         // $push 向数组中添加元素
-        //ts_gc_zuzhijg.update({_id:id},{$set:zuzhiqxglxx});
+        ts_gc_zuzhijg.update({_id:gengxin_zuzhiqxglxx._id},{$set:gengxin_zuzhiqxglxx});
         //ts_gc_zuzhijg.update({$set:zuzhiqxglxx});
         //ts_gc_zuzhijg.save({$set:zuzhiqxglxx});
         //ts_gc_zuzhijg.insert({$set:zuzhiqxglxx});
