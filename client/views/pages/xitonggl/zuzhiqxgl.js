@@ -256,8 +256,9 @@ Template.zuzhiqxgl.onRendered(function () {
                                         var bianjinr = _.findWhere(Session.get('zuzhiqxglxx'),{_id:Identification[0]});
                                         // 手动打开模态框,将数据传到模态框内
                                         $('#bianjijgmodel').modal('show');
+                                        $('#bianjijg').val(bianjinr._id);
                                         $('#bianjijgjgbh').val(bianjinr.jigoubh);
-                                        $('#bianjijgmc').val(bianjinr.jigoumc);
+                                        $('#bianjijgjgmc').val(bianjinr.jigoumc);
                                     }
 
                                     console.log(bianjinr);
@@ -495,7 +496,7 @@ Template.zuzhiqxgl.events({
     'click #bianjijgan':function (event) {
         debugger;
         var jigoubh = $('#bianjijgjgbh').val();
-        var jigoumc = $('#bianjijgmc').val();
+        var jigoumc = $('#bianjijgjgmc').val();
 
         var where_id = $('#bianjijg').val();
 
