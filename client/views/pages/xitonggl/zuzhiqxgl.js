@@ -261,6 +261,36 @@ Template.zuzhiqxgl.onRendered(function () {
                                         $('#bianjijgjgmc').val(bianjinr.jigoumc);
                                     }
 
+                                    // 编辑部门
+                                    if(index == 2){
+                                        var id = Identification[0];
+                                        var bumenIndex = Identification[1];
+                                        var bianjinr = _.findWhere(Session.get('zuzhiqxglxx'),{_id:Identification[0]});
+                                        // 手动打开模态框,将数据传到模态框内
+                                        $('#bianjibmmodel').modal('show');
+                                        $('#bianjibmjg').val(bianjinr._id);
+                                        $('#bianjibmbm').val(bumenIndex);
+                                        $('#bianjibmbmbh').val(bianjinr.bumenxx[bumenIndex].bumenbh);
+                                        $('#bianjibmbmmc').val(bianjinr.bumenxx[bumenIndex].bumenmc);
+                                    }
+
+                                    // 编辑人员
+                                    if(index == 3){
+                                        var id = Identification[0];
+                                        var bumenIndex = Identification[1];
+                                        var renyuanIndex = Identification[2];
+                                        var bianjinr = _.findWhere(Session.get('zuzhiqxglxx'),{_id:Identification[0]});
+                                        // 手动打开模态框,将数据传到模态框内
+                                        $('#bianjirymodel').modal('show');
+                                        $('#bianjiryjg').val(bianjinr._id);
+                                        $('#bianjirybm').val(bumenIndex);
+                                        $('#bianjiryry').val(renyuanIndex);
+                                        $('#bianjiryxm').val(bianjinr.bumenxx[bumenIndex].renyuanxx[renyuanIndex].xingming);
+                                        $('#bianjirybh').val(bianjinr.bumenxx[bumenIndex].renyuanxx[renyuanIndex].zhanghaobh);
+                                        $('#bianjirymc').val(bianjinr.bumenxx[bumenIndex].renyuanxx[renyuanIndex].zhanghaomc);
+                                        $('#bianjirymm').val(bianjinr.bumenxx[bumenIndex].renyuanxx[renyuanIndex].mima);
+                                    }
+
                                     console.log(bianjinr);
                                     console.table(Identification);
                                     console.table(obj);
@@ -532,7 +562,12 @@ Template.zuzhiqxgl.events({
         for(var i in zuzhiqxglxx){
             if(String(zuzhiqxglxx[i]._id).indexOf(where_id) !=  -1){
 
-                for(var j in zuzhiqxglxx[i].bumenxx){
+                zuzhiqxglxx[i].bumenxx[where_bumenbh].bumenbh = bumenbh;
+                zuzhiqxglxx[i].bumenxx[where_bumenbh].bumenmc = bumenmc;
+                gengxin_zuzhiqxglxx.bumenxx[where_bumenbh].bumenbh = bumenbh;
+                gengxin_zuzhiqxglxx.bumenxx[where_bumenbh].bumenmc = bumenmc;
+
+                /*for(var j in zuzhiqxglxx[i].bumenxx){
                     if(String(zuzhiqxglxx[i].bumenxx[j].bumenbh).indexOf(where_bumenbh) !=  -1){
 
                         zuzhiqxglxx[i].bumenxx[j].bumenbh = bumenbh;
@@ -541,7 +576,7 @@ Template.zuzhiqxgl.events({
                         gengxin_zuzhiqxglxx.bumenxx[j].bumenmc = bumenmc;
 
                     }
-                }
+                }*/
 
             }
         }
@@ -556,19 +591,29 @@ Template.zuzhiqxgl.events({
         debugger;
 
         var where_id = $('#bianjiryjg').val();
-        var where_bumenbh = $('#bianjirybm').val();
-        var where_xingming = $('#bianjiryry').val();
+        var where_bumen = $('#bianjirybm').val();
+        var where_renyuan = $('#bianjiryry').val();
 
         var gengxin_zuzhiqxglxx = _.findWhere(Session.get('zuzhiqxglxx'),{_id:where_id});
         var zuzhiqxglxx = Session.get('zuzhiqxglxx');
         for(var i in zuzhiqxglxx){
             if(String(zuzhiqxglxx[i]._id).indexOf(where_id) !=  -1){
 
-                for(var j in zuzhiqxglxx[i].bumenxx){
-                    if(String(zuzhiqxglxx[i].bumenxx[j].bumenbh).indexOf(where_bumenbh) !=  -1){
+                zuzhiqxglxx[i].bumenxx[where_bumen].renyuanxx[where_renyuan].xingming = $('#bianjiryxm').val();
+                zuzhiqxglxx[i].bumenxx[where_bumen].renyuanxx[where_renyuan].zhanghaobh = $('#bianjirybh').val();
+                zuzhiqxglxx[i].bumenxx[where_bumen].renyuanxx[where_renyuan].zhanghaomc = $('#bianjirymc').val();
+                zuzhiqxglxx[i].bumenxx[where_bumen].renyuanxx[where_renyuan].mima = $('#bianjirymm').val();
+
+                gengxin_zuzhiqxglxx.bumenxx[where_bumen].renyuanxx[where_renyuan].xingming = $('#bianjiryxm').val();
+                gengxin_zuzhiqxglxx.bumenxx[where_bumen].renyuanxx[where_renyuan].zhanghaobh = $('#bianjirybh').val();
+                gengxin_zuzhiqxglxx.bumenxx[where_bumen].renyuanxx[where_renyuan].zhanghaomc = $('#bianjirymc').val();
+                gengxin_zuzhiqxglxx.bumenxx[where_bumen].renyuanxx[where_renyuan].mima = $('#bianjirymm').val();
+
+                /*for(var j in zuzhiqxglxx[i].bumenxx){
+                    if(String(zuzhiqxglxx[i].bumenxx[j].bumenbh).indexOf(where_bumen) !=  -1){
 
                         for(var k in zuzhiqxglxx[i].bumenxx[j].renyuanxx){
-                            if(String(zuzhiqxglxx[i].bumenxx[j].renyuanxx[k].xingming).indexOf(where_xingming) != -1){
+                            if(String(zuzhiqxglxx[i].bumenxx[j].renyuanxx[k].xingming).indexOf(where_renyuan) != -1){
 
                                 zuzhiqxglxx[i].bumenxx[j].renyuanxx[k].xingming = $('#bianjiryxm').val();
                                 zuzhiqxglxx[i].bumenxx[j].renyuanxx[k].zhanghaobh = $('#bianjirybh').val();
@@ -583,7 +628,7 @@ Template.zuzhiqxgl.events({
                         }
 
                     }
-                }
+                }*/
             }
         }
 
