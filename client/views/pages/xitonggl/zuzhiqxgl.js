@@ -21,6 +21,13 @@ Template.zuzhiqxgl.onRendered(function () {
         //zuzhiqxglxx = ts_gc_zuzhijg.find({}).fetch();
         var zuzhiqxglxx = Session.get('zuzhiqxglxx');
         if (handle.ready()){
+
+            // Initialize i-check plugin
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green'
+            });
+            
             // 重新生成
             //$('#plugins1').jstree(true).refresh();
             // 销毁
@@ -147,24 +154,24 @@ Template.zuzhiqxgl.onRendered(function () {
 
                     // 角色部门信息
                     var obj = {};
-                    obj.id = zuzhiqxglxx[i].bumenxx[j].bumenbh + 'zuzhiqxglxx' + [i] + 'bumenxx' +[j];
+                    obj.id = zuzhiqxglxx[i].jigoubh + 'zuzhiqxglxx' + [i] + '[' +zuzhiqxglxx[i]._id + ']' + [i] + 'bumenxx' +[j] + '[' + j + ']';
                     obj.text = zuzhiqxglxx[i].bumenxx[j].bumenmc;
                     obj.parent = '#';
                     fanhui_jiaosexx.push(obj);
                     // 角色信息
                     for(var k in zuzhiqxglxx[i].bumenxx[j].juesexx){
                         var obj = {};
-                        obj.id = zuzhiqxglxx[i].bumenxx[j].juesexx[k].juesebh + [i] + 'bumenxx' +[j] + 'juesexx' + [k];
+                        obj.id = zuzhiqxglxx[i].jigoubh + 'zuzhiqxglxx' + [i] + '[' +zuzhiqxglxx[i]._id + ']' + [i] + 'bumenxx' +[j] + '[' + j + ']' + 'juesexx' + [k] + '[' + k + ']';
                         obj.text = zuzhiqxglxx[i].bumenxx[j].juesexx[k].juesemc;
-                        obj.parent = zuzhiqxglxx[i].bumenxx[j].bumenbh + 'zuzhiqxglxx' + [i] + 'bumenxx' +[j];
+                        obj.parent = zuzhiqxglxx[i].jigoubh + 'zuzhiqxglxx' + [i] + '[' +zuzhiqxglxx[i]._id + ']' + [i] + 'bumenxx' +[j] + '[' + j + ']';
                         fanhui_jiaosexx.push(obj);
 
                         // 账号信息
                         for(var l in zuzhiqxglxx[i].bumenxx[j].juesexx[k].zhanghaoxx){
                             var obj = {};
-                            obj.id = zuzhiqxglxx[i].bumenxx[j].juesexx[k].zhanghaoxx[l].zhanghaobh + [i] + 'bumenxx' +[j] + 'jiaosexx' + [k] + 'zhanghaoxx' + [l];
+                            obj.id = zuzhiqxglxx[i].jigoubh + 'zuzhiqxglxx' + [i] + '[' +zuzhiqxglxx[i]._id + ']' + [i] + 'bumenxx' +[j] + '[' + j + ']' + 'juesexx' + [k] + '[' + k + ']' + 'zhanghaoxx' + [l] + '[' + [l] + ']';
                             obj.text = zuzhiqxglxx[i].bumenxx[j].juesexx[k].zhanghaoxx[l].zhanghaomc;
-                            obj.parent = zuzhiqxglxx[i].bumenxx[j].juesexx[k].juesebh + [i] + 'bumenxx' +[j] + 'juesexx' + [k];
+                            obj.parent = zuzhiqxglxx[i].jigoubh + 'zuzhiqxglxx' + [i] + '[' +zuzhiqxglxx[i]._id + ']' + [i] + 'bumenxx' +[j] + '[' + j + ']' + 'juesexx' + [k] + '[' + k + ']';
                             fanhui_jiaosexx.push(obj);
                         }
                     }
@@ -291,9 +298,9 @@ Template.zuzhiqxgl.onRendered(function () {
                                         $('#bianjirymm').val(bianjinr.bumenxx[bumenIndex].renyuanxx[renyuanIndex].mima);
                                     }
 
-                                    console.log(bianjinr);
+                                    /*console.log(bianjinr);
                                     console.table(Identification);
-                                    console.table(obj);
+                                    console.table(obj);*/
                                     inst.edit(obj);
                                 }
                             },
@@ -318,7 +325,85 @@ Template.zuzhiqxgl.onRendered(function () {
                     },
                 },
                 /*"plugins" : [ "checkbox","types" ]*/
-                'plugins' : [ 'types', 'dnd' ],
+                "contextmenu": {
+                    "items": function ($node) {
+                        var tree = $("#tree").jstree(true);
+                        return {
+                            "Edit": {
+                                "separator_before": false,
+                                "separator_after": false,
+                                "label": "编辑",
+                                "action": function (data) {
+                                    var inst = $.jstree.reference(data.reference),
+                                        obj = inst.get_node(data.reference);
+
+                                    /*var d = "1[ddd]sfdsaf[ccc]fdsaf[bbbb]";
+                                    var patt = /\[[^\]]+\]/g;
+                                    d.match(patt)
+                                    //返回数组 ["[ddd]", "[ccc]", "[bbbb]"]
+                                    //如果你想得到["ddd","ccc","bbbb"]请循环数组每一项再替换 .replace(/\[/g,'').replace(/\]/g,'')*/
+                                    var index = 0;
+                                    var patt = /\[[^\]]+\]/g;
+                                    var Identification = obj.id.match(patt);
+                                    var zuzhiqxglxx = Session.get('zuzhiqxglxx');
+
+                                    for(var i in Identification){
+                                        Identification[i] = Identification[i].replace(/\[/g,'').replace(/\]/g,'');
+                                    }
+
+                                    if(Identification.length == 2){
+                                        index = 1; // 编辑部门
+                                    }
+                                    if(Identification.length == 3){
+                                        index = 2; // 编辑角色
+                                    }
+                                    if(Identification.length == 4){
+                                        index = 3; // 编辑账号
+                                    }
+
+                                    // 需要编辑的内容
+                                    var bianjinr;
+
+                                    // 编辑部门
+                                    if(index == 1){
+                                        var id = Identification[0];
+                                        var bumenIndex = Identification[1];
+                                        var bianjinr = _.findWhere(Session.get('zuzhiqxglxx'),{_id:Identification[0]});
+                                        // 手动打开模态框,将数据传到模态框内
+                                        $('#bianjijsbmbmmodel').modal('show');
+                                        $('#bianjijsbmjg').val(bianjinr._id);
+                                        $('#bianjijsbmbm').val(bumenIndex);
+                                        $('#bianjijsbmbmbh').val(bianjinr.bumenxx[bumenIndex].bumenbh);
+                                        $('#bianjijsbmbmmc').val(bianjinr.bumenxx[bumenIndex].bumenmc);
+                                    }
+
+                                    // 编辑人员
+                                    if(index == 6){
+                                        var id = Identification[0];
+                                        var bumenIndex = Identification[1];
+                                        var renyuanIndex = Identification[2];
+                                        var bianjinr = _.findWhere(Session.get('zuzhiqxglxx'),{_id:Identification[0]});
+                                        // 手动打开模态框,将数据传到模态框内
+                                        $('#bianjirymodel').modal('show');
+                                        $('#bianjiryjg').val(bianjinr._id);
+                                        $('#bianjirybm').val(bumenIndex);
+                                        $('#bianjiryry').val(renyuanIndex);
+                                        $('#bianjiryxm').val(bianjinr.bumenxx[bumenIndex].renyuanxx[renyuanIndex].xingming);
+                                        $('#bianjirybh').val(bianjinr.bumenxx[bumenIndex].renyuanxx[renyuanIndex].zhanghaobh);
+                                        $('#bianjirymc').val(bianjinr.bumenxx[bumenIndex].renyuanxx[renyuanIndex].zhanghaomc);
+                                        $('#bianjirymm').val(bianjinr.bumenxx[bumenIndex].renyuanxx[renyuanIndex].mima);
+                                    }
+
+                                    console.log(bianjinr);
+                                    console.table(Identification);
+                                    console.table(obj);
+                                    inst.edit(obj);
+                                }
+                            },
+                        };
+                    }
+                },
+                "plugins" : ["types", "contextmenu" ],
                 'core' : {
                     'data': fanhui_jiaosexx
                 }
