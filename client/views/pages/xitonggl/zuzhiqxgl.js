@@ -123,7 +123,7 @@ Template.zuzhiqxgl.onRendered(function () {
             for(var i in zuzhiqxglxx){
                 var obj = {};
 
-                obj.id = zuzhiqxglxx[i].jigoubh + 'zuzhiqxglxx' + [i];
+                obj.id = zuzhiqxglxx[i].jigoubh + 'zuzhiqxglxx' + [i] + '[' +zuzhiqxglxx[i]._id + ']';
                 obj.text = zuzhiqxglxx[i].jigoumc;
 
                 obj.parent = '#';
@@ -131,17 +131,17 @@ Template.zuzhiqxgl.onRendered(function () {
                 // 部门信息
                 for(var j in zuzhiqxglxx[i].bumenxx){
                     var obj = {};
-                    obj.id = zuzhiqxglxx[i].bumenxx[j].bumenbh + 'zuzhiqxglxx' + [i] + 'bumenxx' +[j];
+                    obj.id = zuzhiqxglxx[i].jigoubh + 'zuzhiqxglxx' + [i] + '[' +zuzhiqxglxx[i]._id + ']' + [i] + 'bumenxx' +[j] + '[' + j + ']';
                     obj.text = zuzhiqxglxx[i].bumenxx[j].bumenmc;
-                    obj.parent = zuzhiqxglxx[i].jigoubh + 'zuzhiqxglxx' + [i];
+                    obj.parent = zuzhiqxglxx[i].jigoubh + 'zuzhiqxglxx' + [i] + '[' +zuzhiqxglxx[i]._id + ']';
                     fanhui_zuzhiqxglxx.push(obj);
 
                     // 人员信息
                     for(var k in zuzhiqxglxx[i].bumenxx[j].renyuanxx){
                         var obj = {};
-                        obj.id = zuzhiqxglxx[i].bumenxx[j].renyuanxx[k].zhanghaobh + [i] + 'bumenxx' +[j] + 'renyuanxx' + [k];
+                        obj.id = zuzhiqxglxx[i].jigoubh + 'zuzhiqxglxx' + [i] + '[' +zuzhiqxglxx[i]._id + ']' + [i] + 'bumenxx' +[j] + '[' + j + ']' + 'renyuanxx' + [k] + '[' + k + ']';
                         obj.text = zuzhiqxglxx[i].bumenxx[j].renyuanxx[k].xingming;
-                        obj.parent = zuzhiqxglxx[i].bumenxx[j].bumenbh + 'zuzhiqxglxx' + [i] + 'bumenxx' +[j];
+                        obj.parent = zuzhiqxglxx[i].jigoubh + 'zuzhiqxglxx' + [i] + '[' +zuzhiqxglxx[i]._id + ']' + [i] + 'bumenxx' +[j] + '[' + j + ']';
                         fanhui_zuzhiqxglxx.push(obj);
                     }
 
@@ -211,9 +211,66 @@ Template.zuzhiqxgl.onRendered(function () {
                         };
                     }
                 },*/
+                "contextmenu": {
+                    "items": function ($node) {
+                        var tree = $("#tree").jstree(true);
+                        return {
+                            "Edit": {
+                                "separator_before": false,
+                                "separator_after": false,
+                                "label": "编辑",
+                                "action": function (data) {
+                                    var inst = $.jstree.reference(data.reference),
+                                        obj = inst.get_node(data.reference);
 
-                /*"plugins" : [ "checkbox","types", "contextmenu" ],*/
-                'plugins' : [ 'types', 'dnd' ],
+                                    /*var d = "1[ddd]sfdsaf[ccc]fdsaf[bbbb]";
+                                    var patt = /\[[^\]]+\]/g;
+                                    d.match(patt)
+                                    //返回数组 ["[ddd]", "[ccc]", "[bbbb]"]
+                                    //如果你想得到["ddd","ccc","bbbb"]请循环数组每一项再替换 .replace(/\[/g,'').replace(/\]/g,'')*/
+                                    var index = 0;
+                                    var patt = /\[[^\]]+\]/g;
+                                    var Identification = obj.id.match(patt);
+                                    var zuzhiqxglxx = Session.get('zuzhiqxglxx');
+
+                                    for(var i in Identification){
+                                        Identification[i] = Identification[i].replace(/\[/g,'').replace(/\]/g,'');
+                                    }
+
+                                    if(Identification.length == 1){
+                                        index = 1;
+                                    }
+                                    if(Identification.length == 2){
+                                        index = 2;
+                                    }
+                                    if(Identification.length == 3){
+                                        index = 3;
+                                    }
+
+                                    // 需要编辑的内容
+                                    var bianjinr;
+
+                                    // 编辑机构
+                                    if(index == 1){
+                                        var id = Identification[0];
+                                        var bianjinr = _.findWhere(Session.get('zuzhiqxglxx'),{_id:Identification[0]});
+                                        // 手动打开模态框,将数据传到模态框内
+                                        $('#bianjijgmodel').modal('show');
+                                        $('#bianjijgjgbh').val(bianjinr.jigoubh);
+                                        $('#bianjijgmc').val(bianjinr.jigoumc);
+                                    }
+
+                                    console.log(bianjinr);
+                                    console.table(Identification);
+                                    console.table(obj);
+                                    inst.edit(obj);
+                                }
+                            },
+                        };
+                    }
+                },
+                "plugins" : ["types", "contextmenu" ],
+                /*'plugins' : [ 'types', 'dnd' ],*/
                 'core' : {
                     'data': fanhui_zuzhiqxglxx
                 }
