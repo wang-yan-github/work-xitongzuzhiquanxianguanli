@@ -376,7 +376,6 @@ Template.zuzhiqxgl.onRendered(function () {
                         }
 
                         document.getElementById("xiangmufl").innerHTML= xiangmuflhtml;
-
                         // 重新初始化 checkbox
                         $('.i-checks').iCheck({
                             checkboxClass: 'icheckbox_square-green',
@@ -386,7 +385,13 @@ Template.zuzhiqxgl.onRendered(function () {
                         for(var i in mabiaoxx){
                             xiangmuflhtml += '<div class="i-checks"><label> <input type="checkbox" value="'+mabiaoxx[i].mazhi+'"> <i></i> ' + mabiaoxx[i].mazhi + ' </label></div>';
                         }
+
                         document.getElementById("xiangmufl").innerHTML= xiangmuflhtml;
+                        // 重新初始化 checkbox
+                        $('.i-checks').iCheck({
+                            checkboxClass: 'icheckbox_square-green',
+                            radioClass: 'iradio_square-green'
+                        });
                     }
 
                 }
