@@ -29,7 +29,7 @@ Template.zuzhiqxgl.onRendered(function () {
 
             var xiangmuflhtml = '';
             for(var i in mabiaoxx){
-                xiangmuflhtml += '<div class="i-checks"><label> <input type="checkbox" value="" checked=""> <i></i> ' + mabiaoxx[i].mazhi + ' </label></div>';
+                xiangmuflhtml += '<div class="i-checks"><label> <input type="checkbox" value="'+mabiaoxx[i].mazhi+'"> <i></i> ' + mabiaoxx[i].mazhi + ' </label></div>';
             }
 
             document.getElementById("xiangmufl").innerHTML= xiangmuflhtml;
@@ -250,7 +250,6 @@ Template.zuzhiqxgl.onRendered(function () {
                                     var index = 0;
                                     var patt = /\[[^\]]+\]/g;
                                     var Identification = obj.id.match(patt);
-                                    var zuzhiqxglxx = Session.get('zuzhiqxglxx');
 
                                     for(var i in Identification){
                                         Identification[i] = Identification[i].replace(/\[/g,'').replace(/\]/g,'');
@@ -350,20 +349,48 @@ Template.zuzhiqxgl.onRendered(function () {
                     var id = Identification[0];
                     var bumenIndex = Identification[1];
                     var renyuanIndex = Identification[2];
-                    var bianjinr = _.findWhere(Session.get('zuzhiqxglxx'),{_id:Identification[0]});
-                    // 手动打开模态框,将数据传到模态框内
-                    /*$('#bianjirymodel').modal('show');
-                    $('#bianjiryjg').val(bianjinr._id);
-                    $('#bianjirybm').val(bumenIndex);
-                    $('#bianjiryry').val(renyuanIndex);
-                    $('#bianjiryxm').val(bianjinr.bumenxx[bumenIndex].renyuanxx[renyuanIndex].xingming);
-                    $('#bianjirybh').val(bianjinr.bumenxx[bumenIndex].renyuanxx[renyuanIndex].zhanghaobh);
-                    $('#bianjirymc').val(bianjinr.bumenxx[bumenIndex].renyuanxx[renyuanIndex].zhanghaomc);
-                    $('#bianjirymm').val(bianjinr.bumenxx[bumenIndex].renyuanxx[renyuanIndex].mima);*/
+                    var zuzhiqxglxx = _.findWhere(Session.get('zuzhiqxglxx'),{_id:Identification[0]});
+                    var xiangmuflhtml = '';
+
+                    // 有权限信息数组
+                    if(zuzhiqxglxx.bumenxx[bumenIndex].renyuanxx[renyuanIndex].quanxianxx){
+                        // 清空
+                        document.getElementById("xiangmufl").innerHTML= '';
+
+                        // 循环权限信息
+                        // 判断是否有权限
+                        // 设置前端页面 checkbox 选中
+                        for(var i in zuzhiqxglxx.bumenxx[bumenIndex].renyuanxx[renyuanIndex].quanxianxx){
+
+                            if(zuzhiqxglxx.bumenxx[bumenIndex].renyuanxx[renyuanIndex].quanxianxx[i].quanxianzt == 1){
+
+                                for(var j in mabiaoxx){
+
+                                    if(mabiaoxx[j].mazhi == zuzhiqxglxx.bumenxx[bumenIndex].renyuanxx[renyuanIndex].quanxianxx[i].quanxianmc){
+                                        xiangmuflhtml += '<div class="i-checks"><label> <input type="checkbox" value="'+mabiaoxx[j].mazhi+'" checked=""> <i></i> ' + mabiaoxx[j].mazhi + ' </label></div>';
+                                    }else{
+                                        xiangmuflhtml += '<div class="i-checks"><label> <input type="checkbox" value="'+mabiaoxx[j].mazhi+'"> <i></i> ' + mabiaoxx[j].mazhi + ' </label></div>';
+                                    }
+                                }
+                            }
+                        }
+
+                        document.getElementById("xiangmufl").innerHTML= xiangmuflhtml;
+
+                        // 重新初始化 checkbox
+                        $('.i-checks').iCheck({
+                            checkboxClass: 'icheckbox_square-green',
+                            radioClass: 'iradio_square-green'
+                        });
+                    }else{
+                        for(var i in mabiaoxx){
+                            xiangmuflhtml += '<div class="i-checks"><label> <input type="checkbox" value="'+mabiaoxx[i].mazhi+'"> <i></i> ' + mabiaoxx[i].mazhi + ' </label></div>';
+                        }
+                        document.getElementById("xiangmufl").innerHTML= xiangmuflhtml;
+                    }
+
                 }
 
-
-                console.table(currentNode);
             });
 
             /*$("#plugins2").jstree({
