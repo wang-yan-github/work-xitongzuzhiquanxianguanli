@@ -2,12 +2,12 @@
 
     {{> pageHeading title='组织权限管理'}}
 
-    <div class="wrapper wrapper-content animated fadeInRight">
-        <div  class="ibox-title">
+    <div class="wrapper wrapper-content">
+        <!--<div  class="ibox-title">
             <div>
                 <a data-toggle="modal" class="btn btn-primary demo1">保存</a>
             </div>
-</div>
+        </div>-->
         <div class="row">
             <div class="col-lg-4">
                 <div class="ibox">
@@ -92,7 +92,7 @@
             <div class="col-lg-4">
                 <div class="ibox">
                     <div class="ibox-title">
-                        <h5>角色管理</h5>
+                        <h5>权限信息</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -103,43 +103,26 @@
                         </div>
                     </div>
                     <div style="height: 470px" class="ibox-content">
-                        <!--<button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal1"> 新增角色 </button>
-                        <button type="button" class="btn btn-sm btn-primary"> 编辑角色 </button>-->
-                        <ul class="list-inline">
+
+                    </div>
+                    <!--<div style="height: 470px" class="ibox-content">
+                        &lt;!&ndash;<button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal1"> 新增角色 </button>
+                        <button type="button" class="btn btn-sm btn-primary"> 编辑角色 </button>&ndash;&gt;
+                        &lt;!&ndash;<ul class="list-inline">
                             <li><button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target='#xinzengjsmodel'> 新增角色 </button></li>
                             <li><button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target='#xinzengzhmodel'> 新增账号 </button></li>
-                        </ul>
-                        <!--<ul class="list-inline">
+                        </ul>&ndash;&gt;
+                        &lt;!&ndash;<ul class="list-inline">
                             <li><button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target='#bianjijsmodel'> 编辑角色 </button></li>
                             <li><button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target='#bianjizhmodel'> 编辑账号 </button></li>
-                        </ul>-->
+                        </ul>&ndash;&gt;
 
                         <div class="ibox-content">
                             <div id="plugins2">
-                                <!--<ul>
-                                    <li class="jstree-open">邳州市交通局
-                                        <ul>
-                                            <li class="jstree-open">普通用户
-                                                <ul>
-                                                    <li data-jstree='"type":"css"}'>道路项目用户</li>
-                                                    <li data-jstree='"type":"css"}'>桥梁项目用户</li>
-                                                    <li data-jstree='"type":"css"}'>安保设施项目用户</li>
-                                                    <li data-jstree='"type":"css"}'>养护项目用户</li>
 
-                                                </ul>
-                                            </li>
-                                            <li>财务用户
-                                                <ul>
-                                                    <li data-jstree='"type":"html"}'>财务管理用户</li>
-                                                    <li data-jstree='"type":"html"}'>财务审批用户</li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>-->
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
 
@@ -234,7 +217,7 @@
                                 </div>
                                 <div class="form-group"><label class="col-sm-4 control-label">账号类型:</label>
                                     <div class="col-sm-8">
-                                        <select class="form-control" id="zhanghaolx">
+                                        <select class="form-control" id="xinzengryzhlx">
                                             <option value="普通用户">普通用户</option>
                                             <option value="财务用户">财务用户</option>
                                         </select>
@@ -362,6 +345,14 @@
                                 <input type="hidden" id="bianjiryry">
                                 <div class="form-group"><label class="col-sm-4 control-label">姓名:</label>
                                     <div class="col-sm-8"><input type="text" class="form-control" placeholder="姓名" id="bianjiryxm"></div>
+                                </div>
+                                <div class="form-group"><label class="col-sm-4 control-label">账号类型:</label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control" id="bianjiryzhlx">
+                                            <option value="普通用户">普通用户</option>
+                                            <option value="财务用户">财务用户</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="form-group"><label class="col-sm-4 control-label">账号编号:</label>
                                     <div class="col-sm-8"><input type="text" class="form-control" placeholder="账号编号" id="bianjirybh"></div>

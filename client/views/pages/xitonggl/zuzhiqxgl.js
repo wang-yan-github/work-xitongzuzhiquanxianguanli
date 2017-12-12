@@ -293,6 +293,7 @@ Template.zuzhiqxgl.onRendered(function () {
                                         $('#bianjirybm').val(bumenIndex);
                                         $('#bianjiryry').val(renyuanIndex);
                                         $('#bianjiryxm').val(bianjinr.bumenxx[bumenIndex].renyuanxx[renyuanIndex].xingming);
+                                        $("#bianjiryzhlx").find("option[value='"+bianjinr.bumenxx[bumenIndex].renyuanxx[renyuanIndex].zhanghaolx+"']").attr("selected",true);
                                         $('#bianjirybh').val(bianjinr.bumenxx[bumenIndex].renyuanxx[renyuanIndex].zhanghaobh);
                                         $('#bianjirymc').val(bianjinr.bumenxx[bumenIndex].renyuanxx[renyuanIndex].zhanghaomc);
                                         $('#bianjirymm').val(bianjinr.bumenxx[bumenIndex].renyuanxx[renyuanIndex].mima);
@@ -314,7 +315,46 @@ Template.zuzhiqxgl.onRendered(function () {
                 }
             });
 
-            $("#plugins2").jstree({
+            // jsTree 点击节点事件
+            $('#plugins1').bind("activate_node.jstree", function (obj, e) {
+                // 获取当前节点
+                var currentNode = e.node;
+
+                var index = 0;
+                var patt = /\[[^\]]+\]/g;
+                var Identification = currentNode.id.match(patt);
+                var zuzhiqxglxx = Session.get('zuzhiqxglxx');
+
+                for(var i in Identification){
+                    Identification[i] = Identification[i].replace(/\[/g,'').replace(/\]/g,'');
+                }
+
+                if(Identification.length == 3){
+                    index = 3;
+                }
+
+                // 编辑人员
+                if(index == 3){
+                    var id = Identification[0];
+                    var bumenIndex = Identification[1];
+                    var renyuanIndex = Identification[2];
+                    var bianjinr = _.findWhere(Session.get('zuzhiqxglxx'),{_id:Identification[0]});
+                    // 手动打开模态框,将数据传到模态框内
+                    /*$('#bianjirymodel').modal('show');
+                    $('#bianjiryjg').val(bianjinr._id);
+                    $('#bianjirybm').val(bumenIndex);
+                    $('#bianjiryry').val(renyuanIndex);
+                    $('#bianjiryxm').val(bianjinr.bumenxx[bumenIndex].renyuanxx[renyuanIndex].xingming);
+                    $('#bianjirybh').val(bianjinr.bumenxx[bumenIndex].renyuanxx[renyuanIndex].zhanghaobh);
+                    $('#bianjirymc').val(bianjinr.bumenxx[bumenIndex].renyuanxx[renyuanIndex].zhanghaomc);
+                    $('#bianjirymm').val(bianjinr.bumenxx[bumenIndex].renyuanxx[renyuanIndex].mima);*/
+                }
+
+
+                console.table(currentNode);
+            });
+
+            /*$("#plugins2").jstree({
                 "checkbox" : {
                     "keep_selected_style" : false,
                     "three_state": false
@@ -324,7 +364,7 @@ Template.zuzhiqxgl.onRendered(function () {
                         'icon' : 'fa fa-folder'
                     },
                 },
-                /*"plugins" : [ "checkbox","types" ]*/
+                /!*"plugins" : [ "checkbox","types" ]*!/
                 "contextmenu": {
                     "items": function ($node) {
                         var tree = $("#tree").jstree(true);
@@ -337,11 +377,11 @@ Template.zuzhiqxgl.onRendered(function () {
                                     var inst = $.jstree.reference(data.reference),
                                         obj = inst.get_node(data.reference);
 
-                                    /*var d = "1[ddd]sfdsaf[ccc]fdsaf[bbbb]";
+                                    /!*var d = "1[ddd]sfdsaf[ccc]fdsaf[bbbb]";
                                     var patt = /\[[^\]]+\]/g;
                                     d.match(patt)
                                     //返回数组 ["[ddd]", "[ccc]", "[bbbb]"]
-                                    //如果你想得到["ddd","ccc","bbbb"]请循环数组每一项再替换 .replace(/\[/g,'').replace(/\]/g,'')*/
+                                    //如果你想得到["ddd","ccc","bbbb"]请循环数组每一项再替换 .replace(/\[/g,'').replace(/\]/g,'')*!/
                                     var index = 0;
                                     var patt = /\[[^\]]+\]/g;
                                     var Identification = obj.id.match(patt);
@@ -394,9 +434,9 @@ Template.zuzhiqxgl.onRendered(function () {
                                         $('#bianjirymm').val(bianjinr.bumenxx[bumenIndex].renyuanxx[renyuanIndex].mima);
                                     }
 
-                                    console.log(bianjinr);
+                                    /!*console.log(bianjinr);
                                     console.table(Identification);
-                                    console.table(obj);
+                                    console.table(obj);*!/
                                     inst.edit(obj);
                                 }
                             },
@@ -407,14 +447,14 @@ Template.zuzhiqxgl.onRendered(function () {
                 'core' : {
                     'data': fanhui_jiaosexx
                 }
-            });
+            });*/
 
         }
     })
     //树形目录
     $(document).ready(function(){
 
-        $("#plugins3").jstree({
+        /*$("#plugins3").jstree({
             "checkbox" : {
                 "keep_selected_style" : false,
                 "three_state": false
@@ -454,7 +494,7 @@ Template.zuzhiqxgl.onRendered(function () {
             }, function () {
                 swal("保存成功!","success");
             });
-        });
+        });*/
 
     });
 });
@@ -573,6 +613,7 @@ Template.zuzhiqxgl.events({
                             // 更新插入
                             var obj = new Object();
                             obj.xingming = $('#xinzengryxm').val();
+                            obj.zhanghaolx = $('#xinzengryzhlx').val();
                             obj.zhanghaobh = $('#xinzengrybh').val();
                             obj.zhanghaomc = $('#xinzengrymc').val();
                             obj.mima = $('#xinzengrymm').val();
@@ -583,6 +624,7 @@ Template.zuzhiqxgl.events({
                             var fanhui_bumenxx = new Array();
                             var obj = new Object();
                             obj.xingming = $('#xinzengryxm').val();
+                            obj.zhanghaolx = $('#xinzengryzhlx').val();
                             obj.zhanghaobh = $('#xinzengrybh').val();
                             obj.zhanghaomc = $('#xinzengrymc').val();
                             obj.mima = $('#xinzengrymm').val()
@@ -685,11 +727,13 @@ Template.zuzhiqxgl.events({
             if(String(zuzhiqxglxx[i]._id).indexOf(where_id) !=  -1){
 
                 zuzhiqxglxx[i].bumenxx[where_bumen].renyuanxx[where_renyuan].xingming = $('#bianjiryxm').val();
+                zuzhiqxglxx[i].bumenxx[where_bumen].renyuanxx[where_renyuan].zhanghaolx = $('#bianjiryzhlx').val();
                 zuzhiqxglxx[i].bumenxx[where_bumen].renyuanxx[where_renyuan].zhanghaobh = $('#bianjirybh').val();
                 zuzhiqxglxx[i].bumenxx[where_bumen].renyuanxx[where_renyuan].zhanghaomc = $('#bianjirymc').val();
                 zuzhiqxglxx[i].bumenxx[where_bumen].renyuanxx[where_renyuan].mima = $('#bianjirymm').val();
 
                 gengxin_zuzhiqxglxx.bumenxx[where_bumen].renyuanxx[where_renyuan].xingming = $('#bianjiryxm').val();
+                gengxin_zuzhiqxglxx.bumenxx[where_bumen].renyuanxx[where_renyuan].zhanghaolx = $('#bianjiryzhlx').val();
                 gengxin_zuzhiqxglxx.bumenxx[where_bumen].renyuanxx[where_renyuan].zhanghaobh = $('#bianjirybh').val();
                 gengxin_zuzhiqxglxx.bumenxx[where_bumen].renyuanxx[where_renyuan].zhanghaomc = $('#bianjirymc').val();
                 gengxin_zuzhiqxglxx.bumenxx[where_bumen].renyuanxx[where_renyuan].mima = $('#bianjirymm').val();
