@@ -352,10 +352,13 @@ Template.zuzhiqxgl.onRendered(function () {
                     var zuzhiqxglxx = _.findWhere(Session.get('zuzhiqxglxx'),{_id:Identification[0]});
                     var xiangmuflhtml = '';
 
+                    // 标题姓名
+                    document.getElementById("xingmingtitle").innerHTML= zuzhiqxglxx.bumenxx[bumenIndex].renyuanxx[renyuanIndex].xingming;
                     // 有权限信息数组
                     if(zuzhiqxglxx.bumenxx[bumenIndex].renyuanxx[renyuanIndex].quanxianxx){
                         // 清空
                         document.getElementById("xiangmufl").innerHTML= '';
+
 
                         // 循环权限信息
                         // 判断是否有权限
