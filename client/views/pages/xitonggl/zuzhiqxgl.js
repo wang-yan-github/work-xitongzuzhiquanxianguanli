@@ -4,11 +4,14 @@ Template.zuzhiqxgl.onCreated(function () {
     // 组织权限管理
     this.zuzhiqxglxx = new ReactiveVar(0);
 
+    handle_mabiaoxx = this.subscribe("xitongguanli_mabiaoxx");
     handle = this.subscribe("xitongguanli_zuzhuqxgl");
     /*订阅并获取数据*/
     Tracker.autorun(function (computation) {
         if (handle.ready()){
             Session.set('zuzhiqxglxx',ts_gc_zuzhijg.find({}).fetch());
+            Session.set('yuanshi_mabiaoxx',ts_gc_mabiaoxx.find({}).fetch());
+            Session.set('mabiaoxx',_.findWhere(ts_gc_mabiaoxx.find({}).fetch(),{'mabiaomc': '项目分类'}).mabiaoxx);
             computation.stop();
         }
     });
@@ -20,7 +23,16 @@ Template.zuzhiqxgl.onRendered(function () {
     Tracker.autorun(function () {
         //zuzhiqxglxx = ts_gc_zuzhijg.find({}).fetch();
         var zuzhiqxglxx = Session.get('zuzhiqxglxx');
+        var mabiaoxx = Session.get('mabiaoxx');
+
         if (handle.ready()){
+
+            var xiangmuflhtml = '';
+            for(var i in mabiaoxx){
+                xiangmuflhtml += '<div class="i-checks"><label> <input type="checkbox" value="" checked=""> <i></i> ' + mabiaoxx[i].mazhi + ' </label></div>';
+            }
+
+            document.getElementById("xiangmufl").innerHTML= xiangmuflhtml;
 
             // Initialize i-check plugin
             $('.i-checks').iCheck({
