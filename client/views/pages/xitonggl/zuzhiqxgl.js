@@ -829,6 +829,18 @@ Template.zuzhiqxgl.events({
         //ts_gc_zuzhijg.update({_id:gengxin_zuzhiqxglxx._id},{$set:gengxin_zuzhiqxglxx});
         $('#xinzengjsmodel').modal('hide');
     },
+    // 权限信息按钮-可以实现权保存/修改功能
+    // 获取checkbox 选中内容 
+    'click #quanxianxxan':function (event) {
+        var zuzhiqxglxx = Session.get('zuzhiqxglxx');
+
+        //$('input').val('');
+        //Session.set('zuzhiqxglxx',zuzhiqxglxx);
+        //ts_gc_zuzhijg.update({_id:gengxin_zuzhiqxglxx._id},{$set:gengxin_zuzhiqxglxx});
+        $('#xinzengjsmodel').modal('hide');quanxxbcan
+    },
+
+
 });
 
 
