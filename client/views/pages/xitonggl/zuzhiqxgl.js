@@ -908,6 +908,8 @@ Template.zuzhiqxgl.events({
             }
         }
 
+        // 清空人员姓名标题
+        $('#xingmingtitle').empty();
         Session.set('zuzhiqxglxx',zuzhiqxglxx)
         ts_gc_zuzhijg.update({_id:fanhui_zuzhiqxglxx._id},{$set:fanhui_zuzhiqxglxx});
     },
