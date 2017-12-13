@@ -382,16 +382,17 @@ Template.zuzhiqxgl.onRendered(function () {
                                         var bumenIndex = Identification[1];
                                         var renyuanIndex = Identification[2];
                                         var bianjinr = _.findWhere(Session.get('zuzhiqxglxx'),{_id:Identification[0]});
-                                        // 手动打开模态框,将数据传到模态框内
-                                        $('#bianjirymodel').modal('show');
-                                        $('#bianjiryjg').val(bianjinr._id);
-                                        $('#bianjirybm').val(bumenIndex);
-                                        $('#bianjiryry').val(renyuanIndex);
-                                        $('#bianjiryxm').val(bianjinr.bumenxx[bumenIndex].renyuanxx[renyuanIndex].xingming);
-                                        $("#bianjiryzhlx").find("option[value='"+bianjinr.bumenxx[bumenIndex].renyuanxx[renyuanIndex].zhanghaolx+"']").attr("selected",true);
-                                        $('#bianjirybh').val(bianjinr.bumenxx[bumenIndex].renyuanxx[renyuanIndex].zhanghaobh);
-                                        $('#bianjirymc').val(bianjinr.bumenxx[bumenIndex].renyuanxx[renyuanIndex].zhanghaomc);
-                                        $('#bianjirymm').val(bianjinr.bumenxx[bumenIndex].renyuanxx[renyuanIndex].mima);
+                                        var zuzhiqxglxx = Session.get('zuzhiqxglxx');
+
+                                        for(var i in zuzhiqxglxx){
+                                            if(String(zuzhiqxglxx[i]._id).indexOf(id) !=  -1){
+                                                zuzhiqxglxx[i].bumenxx[bumenIndex].renyuanxx.splice(renyuanIndex,1);
+                                                bianjinr.bumenxx[bumenIndex].renyuanxx.splice(renyuanIndex,1);
+                                            }
+                                        }
+
+                                        Session.set('zuzhiqxglxx',zuzhiqxglxx);
+                                        ts_gc_zuzhijg.update({_id:bianjinr._id},{$set:bianjinr});
                                     }
 
                                     inst.edit(obj);
