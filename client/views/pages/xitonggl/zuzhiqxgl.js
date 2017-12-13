@@ -29,7 +29,7 @@ Template.zuzhiqxgl.onRendered(function () {
 
             var xiangmuflhtml = '';
             for(var i in mabiaoxx){
-                xiangmuflhtml += '<div class="i-checks"><label> <input type="checkbox" value="'+mabiaoxx[i].mazhi+'"> <i></i> ' + mabiaoxx[i].mazhi + ' </label></div>';
+                xiangmuflhtml += '<div class="i-checks"><label> <input type="checkbox" name="cbox" value="'+mabiaoxx[i].mazhi+'"> <i></i> ' + mabiaoxx[i].mazhi + ' </label></div>';
             }
 
             document.getElementById("xiangmufl").innerHTML= xiangmuflhtml;
@@ -344,13 +344,14 @@ Template.zuzhiqxgl.onRendered(function () {
                     index = 3;
                 }
 
-                // 编辑人员
+                // 人员权限信息详情
                 if(index == 3){
                     var id = Identification[0];
                     var bumenIndex = Identification[1];
                     var renyuanIndex = Identification[2];
                     var zuzhiqxglxx = _.findWhere(Session.get('zuzhiqxglxx'),{_id:Identification[0]});
                     var xiangmuflhtml = '';
+                    var mabiaombxxbh = new Array();
 
                     // 标题姓名
                     document.getElementById("xingmingtitle").innerHTML= zuzhiqxglxx.bumenxx[bumenIndex].renyuanxx[renyuanIndex].xingming;
@@ -378,12 +379,19 @@ Template.zuzhiqxgl.onRendered(function () {
                             }
 
                             if(flag){
-                                xiangmuflhtml += '<div class="i-checks"><label> <input type="checkbox" value="'+mabiaoxx[i].mazhi+'" checked=""> <i></i> ' + mabiaoxx[i].mazhi + ' </label></div>';
+                                mabiaombxxbh.push(mabiaoxx[i].bianhao);
+                                xiangmuflhtml += '<div class="i-checks"><label> <input type="checkbox" name="cbox" value="'+mabiaoxx[i].mazhi+'" checked=""> <i></i> ' + mabiaoxx[i].mazhi + ' </label></div>';
                             }else{
-                                xiangmuflhtml += '<div class="i-checks"><label> <input type="checkbox" value="'+mabiaoxx[i].mazhi+'"> <i></i> ' + mabiaoxx[i].mazhi + ' </label></div>';
+                                mabiaombxxbh.push(mabiaoxx[i].bianhao);
+                                xiangmuflhtml += '<div class="i-checks"><label> <input type="checkbox" name="cbox" value="'+mabiaoxx[i].mazhi+'"> <i></i> ' + mabiaoxx[i].mazhi + ' </label></div>';
                             }
 
                         }
+
+                        // 人员权限信息保存修改定位-权限id-部门数组下标-人员数据下标
+                        xiangmuflhtml += '<input type="hidden" id="Identification" value="'+Identification+'">';
+                        // 码表编号
+                        xiangmuflhtml += '<input type="hidden" id="mabiaombxxbh" value="'+mabiaombxxbh+'">';
 
                         document.getElementById("xiangmufl").innerHTML= xiangmuflhtml;
                         // 重新初始化 checkbox
@@ -393,7 +401,7 @@ Template.zuzhiqxgl.onRendered(function () {
                         });
                     }else{
                         for(var i in mabiaoxx){
-                            xiangmuflhtml += '<div class="i-checks"><label> <input type="checkbox" value="'+mabiaoxx[i].mazhi+'"> <i></i> ' + mabiaoxx[i].mazhi + ' </label></div>';
+                            xiangmuflhtml += '<div class="i-checks"><label> <input type="checkbox" name="cbox" value="'+mabiaoxx[i].mazhi+'"> <i></i> ' + mabiaoxx[i].mazhi + ' </label></div>';
                         }
 
                         document.getElementById("xiangmufl").innerHTML= xiangmuflhtml;
@@ -834,10 +842,74 @@ Template.zuzhiqxgl.events({
     'click #quanxianxxan':function (event) {
         var zuzhiqxglxx = Session.get('zuzhiqxglxx');
 
-        //$('input').val('');
-        //Session.set('zuzhiqxglxx',zuzhiqxglxx);
-        //ts_gc_zuzhijg.update({_id:gengxin_zuzhiqxglxx._id},{$set:gengxin_zuzhiqxglxx});
-        $('#xinzengjsmodel').modal('hide');quanxxbcan
+        var checkboxValue= new Array();
+        var checkboxText= new Array();
+        var checkboxStr=document.getElementsByName("cbox");
+        for(var i=0; i<checkboxStr.length; i++){
+            if(checkboxStr[i].checked){
+                //alert(checkboxStr[i].value+","+checkboxStr[i].nextSibling.nodeValue);
+                checkboxValue.push(checkboxStr[i].value);
+                checkboxText.push(checkboxStr[i].nextSibling.nodeValue);
+            }
+        }
+        //输出值和文本
+        //alert("checkboxValue:"+checkboxValue);
+        //alert("checkboxText:"+checkboxText);
+        //把获得的数据转换为字符串传递到后台
+        //checkboxValue=checkboxValue.toString();
+        //checkboxText=checkboxText.toString();
+
+        var Identification = $('#Identification').val().split(",");
+        var mabiaombxxbh = $('#mabiaombxxbh').val().split(",");
+        console.log(mabiaombxxbh);
+        var id = Identification[0];
+        var bumenIndex = Identification[1];
+        var renyuanIndex = Identification[2];
+        var fanhui_zuzhiqxglxx = _.findWhere(Session.get('zuzhiqxglxx'),{_id:Identification[0]});
+
+        //清空数组
+        if(fanhui_zuzhiqxglxx.bumenxx[bumenIndex].renyuanxx[renyuanIndex].quanxianxx){
+            fanhui_zuzhiqxglxx.bumenxx[bumenIndex].renyuanxx[renyuanIndex].quanxianxx.length = 0;
+        }
+
+        debugger;
+        // Session 响应式
+        for(var i in zuzhiqxglxx){
+            if(String(zuzhiqxglxx[i]._id).indexOf(id) !=  -1){
+
+                //清空数组
+                if(zuzhiqxglxx[i].bumenxx[bumenIndex].renyuanxx[renyuanIndex].quanxianxx){
+                    zuzhiqxglxx[i].bumenxx[bumenIndex].renyuanxx[renyuanIndex].quanxianxx.length = 0;
+                }
+
+                for(var j in checkboxValue){
+
+                    if(fanhui_zuzhiqxglxx.bumenxx[bumenIndex].renyuanxx[renyuanIndex].quanxianxx){
+                        //
+                        // 编辑
+                        var obj = new Object();
+                        obj.quanxianzt = '1';
+                        obj.quanxianmc = checkboxValue[j];
+                        obj.quanxianbh = mabiaombxxbh[j];
+                        fanhui_zuzhiqxglxx.bumenxx[bumenIndex].renyuanxx[renyuanIndex].quanxianxx.push(obj);
+                        zuzhiqxglxx[i].bumenxx[bumenIndex].renyuanxx[renyuanIndex].quanxianxx.push(obj);
+                    }else{
+                        // 第一次新增
+                        var fanhui_quanxianxx = new Array();
+                        var obj = new Object();
+                        obj.quanxianzt = '1';
+                        obj.quanxianmc = checkboxValue[j];
+                        obj.quanxianbh = mabiaombxxbh[j];
+                        fanhui_quanxianxx.push(obj);
+                        fanhui_zuzhiqxglxx.bumenxx[bumenIndex].renyuanxx[renyuanIndex].quanxianxx = fanhui_quanxianxx;
+                        zuzhiqxglxx[i].bumenxx[bumenIndex].renyuanxx[renyuanIndex].quanxianxx = fanhui_quanxianxx;
+                    }
+                }
+            }
+        }
+
+        Session.set('zuzhiqxglxx',zuzhiqxglxx)
+        ts_gc_zuzhijg.update({_id:fanhui_zuzhiqxglxx._id},{$set:fanhui_zuzhiqxglxx});
     },
 
 
